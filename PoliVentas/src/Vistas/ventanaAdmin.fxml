@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ventanaAdmin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.Administrador">
+   <children>
+      <MenuBar layoutY="-2.0" prefHeight="34.0" prefWidth="715.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Busqueda">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#buscar" text="Sencilla" />
+                  <MenuItem mnemonicParsing="false" onAction="#busqueda_avanzada" text="Avanzada" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Administrar">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#admin_usuarios" text="Administrar Usuarios" />
+                  <MenuItem mnemonicParsing="false" onAction="#admin_productos" text="Administrar Productos" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Compras">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#compras_pendientes" text="Pedientes de entrega" />
+                  <MenuItem mnemonicParsing="false" onAction="#compras_anuladas" text="Anuladas" />
+                  <MenuItem mnemonicParsing="false" onAction="#compras_exitosas" text="Exitosas" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Otros">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#cerrar_sesion" text="Cerrar Sesión" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <AnchorPane fx:id="ventanaDinamica" layoutX="-4.0" layoutY="33.0" prefHeight="507.0" prefWidth="715.0">
+         <children>
+            <Label layoutX="147.0" layoutY="34.0" prefHeight="122.0" prefWidth="427.0" text="HOLA, 'NOMBRE DEL ADMINISTRADOR'">
+               <font>
+                  <Font name="Britannic Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
