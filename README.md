@@ -9,21 +9,24 @@ PROYECTO DISEÑO DE SOFTWARE - POLIVENTAS
 ---------------
 Para observar el flujo correcto del sistema, se debe ingresar con un perfil de usuario distinto.
 
-* Iniciar sesion como Comprador.
+* Iniciar sesion como Comprador:
 ```
 Usuario: comprador
+Password:
 
 ```
-* Iniciar sesion como Vendedor.
-
-```
-Usuario: vendedor
-```
-
-* Iniciar sesion como Administrador.
+* Iniciar sesion como Vendedor:
 
 ```
 Usuario: vendedor
+Password:
+```
+
+* Iniciar sesion como Administrador:
+
+```
+Usuario: admin
+Password:
 ```
 
 ```
