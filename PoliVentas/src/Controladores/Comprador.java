@@ -5,13 +5,6 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class Comprador {
@@ -70,7 +63,7 @@ public class Comprador {
 	
 	@FXML
 	private void top_articulos(ActionEvent event) throws IOException{
-		AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/topArticulos.fxml"));
+		AnchorPane pane = (AnchorPane)FXMLLoader.load(this.getClass().getResource("/Vistas/topArticulos.fxml"));
 		this.ventanaDinamica.getChildren().setAll(pane);
 		
 	}
