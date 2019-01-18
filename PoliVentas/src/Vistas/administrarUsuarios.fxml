@@ -28,7 +28,7 @@
          </opaqueInsets>
       </Separator>
       <TextField layoutX="151.0" layoutY="101.0" prefHeight="26.0" prefWidth="160.0" />
-      <Label layoutX="76.0" layoutY="62.0" prefHeight="30.0" prefWidth="86.0" text="Nombres:">
+      <Label layoutX="76.0" layoutY="132.0" prefHeight="30.0" prefWidth="86.0" text="Nombres:">
          <font>
             <Font name="Britannic Bold" size="14.0" />
          </font>
@@ -38,19 +38,19 @@
             <Font name="Britannic Bold" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="151.0" layoutY="137.0" prefHeight="26.0" prefWidth="160.0" />
-      <Label layoutX="358.0" layoutY="97.0" prefHeight="30.0" prefWidth="86.0" text="Matricula:">
+      <TextField layoutX="150.0" layoutY="60.0" prefHeight="26.0" prefWidth="160.0" />
+      <Label layoutX="359.0" layoutY="56.0" prefHeight="30.0" prefWidth="86.0" text="Matricula:">
          <font>
             <Font name="Britannic Bold" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="431.0" layoutY="134.0" prefHeight="26.0" prefWidth="160.0" />
-      <Label layoutX="357.0" layoutY="132.0" prefHeight="30.0" prefWidth="88.0" text="Telefono:">
+      <TextField layoutX="432.0" layoutY="93.0" prefHeight="26.0" prefWidth="160.0" />
+      <Label layoutX="358.0" layoutY="91.0" prefHeight="30.0" prefWidth="88.0" text="Telefono:">
          <font>
             <Font name="Britannic Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="76.0" layoutY="135.0" prefHeight="30.0" prefWidth="86.0" text="Cédula:">
+      <Label layoutX="76.0" layoutY="58.0" prefHeight="30.0" prefWidth="86.0" text="Cédula:">
          <font>
             <Font name="Britannic Bold" size="14.0" />
          </font>
@@ -68,12 +68,12 @@
             <Font name="Britannic Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="358.0" layoutY="58.0" prefHeight="30.0" prefWidth="104.0" text="Apellidos:">
+      <Label layoutX="358.0" layoutY="132.0" prefHeight="30.0" prefWidth="104.0" text="Apellidos:">
          <font>
             <Font name="Britannic Bold" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="431.0" layoutY="98.0" prefHeight="26.0" prefWidth="160.0" />
+      <TextField layoutX="432.0" layoutY="57.0" prefHeight="26.0" prefWidth="160.0" />
       <Label layoutX="73.0" layoutY="203.0" prefHeight="30.0" prefWidth="86.0" text="WhatsApp:">
          <font>
             <Font name="Britannic Bold" size="14.0" />
@@ -87,8 +87,8 @@
       <CheckBox layoutX="151.0" layoutY="210.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="43.0" selected="true" text="SI" />
       <CheckBox layoutX="201.0" layoutY="210.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="43.0" text="NO" />
       <ComboBox layoutX="434.0" layoutY="206.0" prefHeight="26.0" prefWidth="160.0" promptText="COMPRADOR" />
-      <TextField layoutX="150.0" layoutY="64.0" prefHeight="26.0" prefWidth="160.0" />
-      <TextField layoutX="430.0" layoutY="60.0" prefHeight="26.0" prefWidth="160.0" />
+      <TextField layoutX="151.0" layoutY="134.0" prefHeight="26.0" prefWidth="160.0" />
+      <TextField layoutX="430.0" layoutY="134.0" prefHeight="26.0" prefWidth="160.0" />
       <Button layoutX="253.0" layoutY="238.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="157.0" text="Crear/Actualizar" textAlignment="CENTER" textOverrun="CLIP">
          <font>
             <Font name="Britannic Bold" size="18.0" />

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vistas;
+package Controladores;
 
 import DAO.ProductoDAO;
 import Modelos.Producto;
@@ -23,7 +23,7 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author Diego
  */
-public class TopArticulosController implements Initializable {
+public class TopArticulos implements Initializable {
     
     ProductoDAO productoDAO;
     Conexion conexion = Conexion.getInstance();
@@ -33,13 +33,13 @@ public class TopArticulosController implements Initializable {
     @FXML
     private TableView<Producto> tablaArticulosMasBuscados;
     @FXML
-    private TableColumn<Producto, Producto> t;//
-    @FXML
     private TableColumn<Producto, String> columnaProducto;
     @FXML
     private TableColumn<Producto, String> columnaCategoria;
     @FXML
     private TableColumn<Producto, Double> columnaPrecio;
+    @FXML
+    private TableColumn<?, ?> numArticulo;
 
     /**
      * Initializes the controller class.
