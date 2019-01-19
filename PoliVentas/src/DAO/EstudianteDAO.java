@@ -35,7 +35,7 @@ public class EstudianteDAO {
                     + e.getCedula() + "','" + e.getMatricula() + "','" + e.getNombre() + "','" + e.getApellido() + "','"
                     + e.getNombreU() + "','" + e.getContrasenia() + "','" + e.getTelefono() + "','" + e.isWhatsapp() + "','"
                     + e.isEliminadoE() + "','" + e.getEmail() + "','" + e.getDireccion() + "','" + e.getSaldo() + "')'");
-            ResultSet resultados = ingreso.executeQuery();
+            ingreso.executeUpdate();
             if (e instanceof Vendedor) {
                 Vendedor v = (Vendedor) e;
                 PreparedStatement ingresoV = conexion.getCnx().prepareStatement("INSERT INTO Vendedor VALUES ("
@@ -54,7 +54,7 @@ public class EstudianteDAO {
                         + e.getCedula() + "','" + 2 + "Comprador)");
                 ResultSet resultados4 = ingresoRC.executeQuery();
             }
-
+            conexion.cerrar();
         } catch (SQLException ex) {
             alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("Error");
@@ -62,15 +62,14 @@ public class EstudianteDAO {
             alerta.setContentText("Revise el estado del servidor");
             alerta.showAndWait();
         }
-        conexion.cerrar();
     }
 
     public Estudiante consultarEstudiante(String cedula) {
-        Estudiante e =  new Estudiante();
+        Estudiante e = new Estudiante();
         conexion.obtener();
         try {
             PreparedStatement consulta = conexion.getCnx().prepareStatement(" Select * FROM Estudiante, Rol WHERE "
-                    + "Estudiante.cedula = " + cedula + "AND Rol.idEstudiante = " + cedula +"')'");
+                    + "Estudiante.cedula = " + cedula + "AND Rol.idEstudiante = " + cedula + " AND Estudiante.eliminadoE <> true')'");
             ResultSet resultados = consulta.executeQuery();
             switch (resultados.getString("Rol.nombre")) {
                 case "Administrador":
@@ -78,7 +77,7 @@ public class EstudianteDAO {
                     break;
                 case "Vendedor":
                     e = new Vendedor();
-                            break;
+                    break;
                 case "Comprador":
                     e = new Comprador();
                     break;
@@ -92,6 +91,7 @@ public class EstudianteDAO {
             e.setDireccion(resultados.getString("estudiante.direccion"));
             e.setEmail(resultados.getString("estudiante.correo"));
             e.setWhatsapp(resultados.getBoolean("estudiante.whatsapp"));
+            conexion.cerrar();
         } catch (SQLException ex) {
             alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("Error");
@@ -99,7 +99,53 @@ public class EstudianteDAO {
             alerta.setContentText("Revise el estado del servidor");
             alerta.showAndWait();
         }
-        conexion.cerrar();
         return e;
+    }
+
+    public void actualizarEstudiante(Estudiante e) {
+        conexion.obtener();
+        try {
+            PreparedStatement modificar = conexion.getCnx().prepareStatement("UPDATE Estudiante "
+                    + "SET ususario ='" + e.getNombreU() + "', telefono = '" + e.getTelefono()
+                    + "', nombre = '" + e.getNombre() + "', apellido ='" + e.getApellido()
+                    + "', direcion = '" + e.getDireccion() + "',correo = '" + e.getEmail()
+                    + "',whatsapp = '" + e.isWhatsapp() + " WHERE cedula = " + e.getCedula() + "");
+            modificar.executeUpdate();
+            if (e instanceof Vendedor) {
+                PreparedStatement modificacionRV = conexion.getCnx().prepareStatement("UPDATE Rol "
+                        + "SET idRol = 1 SET nombre = Vendedor WHERE idEstudiante ='" + e.getCedula() + "");
+                modificacionRV.executeUpdate();
+            } else if (e instanceof Administrador) {
+                PreparedStatement modificacionRA = conexion.getCnx().prepareStatement("UPDATE Rol "
+                        + "SET idRol = 0 SET nombre = Administrador WHERE idEstudiante ='" + e.getCedula() + "");
+                modificacionRA.executeUpdate();
+            } else if (e instanceof Comprador) {
+                PreparedStatement modificacionRC = conexion.getCnx().prepareStatement("UPDATE Rol "
+                        + "SET idRol = 2 SET nombre = Comprador WHERE idEstudiante ='" + e.getCedula() + "");
+                modificacionRC.executeUpdate();
+            }
+            conexion.cerrar();
+        } catch (SQLException ex) {
+            alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Error");
+            alerta.setHeaderText("Error de Conección");
+            alerta.setContentText("Revise el estado del servidor");
+            alerta.showAndWait();
+        }
+    }
+
+    public void eliminarEstudiante(Estudiante e) {
+        try {
+            conexion.obtener();
+            PreparedStatement eliminarEstudiante = conexion.getCnx().prepareStatement("UPDATE Estudiante "
+                    + "SET eliminadoE  = true WHERE cedula ='" +e.getCedula()+ "");
+            eliminarEstudiante.executeUpdate();
+        } catch (SQLException ex) {
+            alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Error");
+            alerta.setHeaderText("Error de Conección");
+            alerta.setContentText("Revise el estado del servidor");
+            alerta.showAndWait();
+        }
     }
 }

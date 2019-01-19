@@ -30,7 +30,7 @@ public class ProductoDAO {
         conexion.obtener();
         try {
             PreparedStatement consulta = conexion.getCnx().prepareStatement("SELECT * FROM "
-                    + "producto ORDER BY contadorBusqueda");
+                    + "producto WHERE eliminadoP <> true ORDER BY contadorBusqueda");
             ResultSet resultados = consulta.executeQuery();
             while (resultados.next()) {
                 Producto producto = new Producto();

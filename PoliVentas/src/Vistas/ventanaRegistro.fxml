@@ -98,5 +98,13 @@
          </font>
       </Label>
       <TextField fx:id="confiContra" layoutX="459.0" layoutY="188.0" prefHeight="26.0" prefWidth="160.0" />
+      <Button layoutX="14.0" layoutY="420.0" mnemonicParsing="false" onMouseClicked="#retroceder" prefHeight="30.0" prefWidth="86.0" text="Atras" textAlignment="CENTER" textOverrun="CLIP">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+         <effect>
+            <InnerShadow color="#1050e4" />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>

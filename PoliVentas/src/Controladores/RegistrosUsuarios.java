@@ -10,10 +10,12 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class RegistrosUsuarios {
@@ -47,10 +49,17 @@ public class RegistrosUsuarios {
     @FXML
     public void registrar() throws IOException {
         if (!verificarCampos()) {
-            registrarEstudiante();
-            AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/ventanaPrincipal.fxml"));
-            this.registrosUsuarios.getChildren().setAll(pane);
-        }else{
+            alerta = new Alert(Alert.AlertType.CONFIRMATION);
+            alerta.setTitle("Confirmacion");
+            alerta.setHeaderText("Confirmacion de Registro");
+            alerta.setContentText("¿Está seguro de que desea realizar este registro?");
+            alerta.showAndWait();
+            if (alerta.getResult() == ButtonType.OK) {
+                registrarEstudiante();
+                AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/ventanaPrincipal.fxml"));
+                this.registrosUsuarios.getChildren().setAll(pane);
+            }
+        } else {
             alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("Error");
             alerta.setHeaderText("Campos Vacios");
@@ -87,13 +96,19 @@ public class RegistrosUsuarios {
     }
 
     private boolean verificarCampos() {
-        boolean comprobacion = !(this.cedula.getText().equals("") && this.matricula.getText().equals("")
+        boolean comprobacion = this.cedula.getText().equals("") && this.matricula.getText().equals("")
                 && this.nombres.getText().equals("") && this.apellidos.getText().equals("")
                 && this.usuario.getText().equals("") && this.telefono.getText().equals("")
                 && this.contrasenia.getText().equals("") && this.confiContra.getText().equals("")
-                && !this.ws_si.isSelected() && !this.ws_no.isSelected() && this.correo.getText().equals("")
-                && this.direccion.getText().equals(""));
+                && (this.ws_si.isSelected() || this.ws_no.isSelected()) && this.correo.getText().equals("")
+                && this.direccion.getText().equals("");
         return comprobacion;
+    }
+
+    @FXML
+    private void retroceder(MouseEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/ventanaPrincipal.fxml"));
+        this.registrosUsuarios.getChildren().setAll(pane);
     }
 
 }

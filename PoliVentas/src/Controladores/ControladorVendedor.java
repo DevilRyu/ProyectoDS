@@ -20,7 +20,6 @@ public class ControladorVendedor {
 		this.ventanaDinamica.getChildren().setAll(pane);
 	}
 	
-	@FXML
 	public void initialize() {
 		
 

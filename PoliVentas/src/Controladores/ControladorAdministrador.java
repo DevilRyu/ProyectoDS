@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
-public class Administrador {
+public class ControladorAdministrador {
 
 	@FXML
 	private AnchorPane ventanaAdmin,ventanaDinamica;

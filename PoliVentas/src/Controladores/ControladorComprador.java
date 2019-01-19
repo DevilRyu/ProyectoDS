@@ -22,7 +22,6 @@ public class ControladorComprador {
 		this.ventanaDinamica.getChildren().setAll(pane);
 	}
 	
-	@FXML
 	public void initialize() {
 		
 
