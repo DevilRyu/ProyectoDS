@@ -46,7 +46,7 @@
       </Label>
       <TextField fx:id="nombres" layoutX="176.0" layoutY="233.0" prefHeight="26.0" prefWidth="160.0" />
       <TextField fx:id="correo" layoutX="455.0" layoutY="91.0" prefHeight="26.0" prefWidth="67.0" />
-      <Label layoutX="522.0" layoutY="96.0" text="\@espol.edu.ec" />
+      <Label fx:id="extension" layoutX="522.0" layoutY="96.0" text="\@espol.edu.ec" />
       <Label layoutX="353.0" layoutY="288.0" prefHeight="30.0" prefWidth="86.0" text="Teléfono:">
          <font>
             <Font name="Britannic Bold" size="18.0" />

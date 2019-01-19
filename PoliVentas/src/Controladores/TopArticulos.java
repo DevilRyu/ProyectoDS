@@ -25,8 +25,8 @@ import javafx.scene.layout.AnchorPane;
  */
 public class TopArticulos implements Initializable {
     
-    ProductoDAO productoDAO;
-    Conexion conexion = Conexion.getInstance();
+    private ProductoDAO productoDAO;
+    private Conexion conexion = Conexion.getInstance();
 
     @FXML
     private AnchorPane top_articulos;

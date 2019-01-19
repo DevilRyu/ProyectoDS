@@ -7,10 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
-public class Vendedor {
+public class ControladorComprador {
+
+	
 
 	@FXML
-	private AnchorPane ventanaVendedor,ventanaDinamica;
+	private AnchorPane ventanaComprador,ventanaDinamica;
 
 	
 	
@@ -54,36 +56,14 @@ public class Vendedor {
 	@FXML
 	private void cerrar_sesion(ActionEvent event) throws IOException{
 		AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/ventanaPrincipal.fxml"));
-		this.ventanaVendedor.getChildren().setAll(pane);
+		this.ventanaComprador.getChildren().setAll(pane);
 		
 	}
 	
 	
 	@FXML
 	private void top_articulos(ActionEvent event) throws IOException{
-		AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/topArticulos.fxml"));
-		this.ventanaDinamica.getChildren().setAll(pane);
-		
-	}
-	
-	
-	@FXML
-	private void ventas_pendientes(ActionEvent event) throws IOException{
-		AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/ventasPendientes.fxml"));
-		this.ventanaDinamica.getChildren().setAll(pane);
-		
-	}
-	
-	@FXML
-	private void resumen_ventas(ActionEvent event) throws IOException{
-		AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/resumenVentas.fxml"));
-		this.ventanaDinamica.getChildren().setAll(pane);
-		
-	}
-	
-	@FXML
-	private void productos(ActionEvent event) throws IOException{
-		AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/productos.fxml"));
+		AnchorPane pane = (AnchorPane)FXMLLoader.load(this.getClass().getResource("/Vistas/topArticulos.fxml"));
 		this.ventanaDinamica.getChildren().setAll(pane);
 		
 	}
@@ -94,7 +74,6 @@ public class Vendedor {
 		this.ventanaDinamica.getChildren().setAll(pane);
 		
 	}
-	
 	
 	
 	
