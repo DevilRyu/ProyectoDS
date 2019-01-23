@@ -9,7 +9,7 @@ public class GestionarBase {
 	private static CallableStatement procedimiento;
 
 	public static void conectar() {
-		try {
+		try{
 			int port = 3306;
 			String host = "db4free.net";
 			String db = "poliventas";
@@ -21,9 +21,14 @@ public class GestionarBase {
 			con = DriverManager.getConnection(url, usuario, password);
 
 			System.out.println("conectado a la base de datos");
-		} catch (ClassNotFoundException | SQLException ex) {
+		
+			} catch (SQLException ex) {
 			Logger.getLogger(GestionarBase.class.getName()).log(Level.SEVERE, null, ex);
 		}
+                catch (ClassNotFoundException ex) {
+			Logger.getLogger(GestionarBase.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		
 
 	}
 
@@ -98,6 +103,24 @@ public class GestionarBase {
 	public static void asignarparametrosString(int posicion, String argumento) {
 		try {
 			procedimiento.setString(posicion, argumento);
+		} catch (SQLException ex) {
+			Logger.getLogger(GestionarBase.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+	}
+        
+        public static void asignarparametrosDouble(int posicion, Double argumento) {
+		try {
+			procedimiento.setDouble(posicion, argumento);
+		} catch (SQLException ex) {
+			Logger.getLogger(GestionarBase.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+	}
+        
+        public static void asignarparametrosBoolean(int posicion, boolean argumento) {
+		try {
+			procedimiento.setBoolean(posicion, argumento);
 		} catch (SQLException ex) {
 			Logger.getLogger(GestionarBase.class.getName()).log(Level.SEVERE, null, ex);
 		}

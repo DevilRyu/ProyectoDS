@@ -1,115 +1,149 @@
-package Controladores;
 /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Controladores;
+
 import DAO.EstudianteDAO;
-import DataBase.Conexion;
+import Modelos.Administrador;
 import Modelos.Comprador;
 import Modelos.Estudiante;
 import Modelos.Vendedor;
-
 import java.io.IOException;
-
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-*/
-public class RegistrosUsuarios {
-/*
-    private EstudianteDAO estudianteDAO;
-    private Conexion conexion = Conexion.getInstance();
-    private Alert alerta;
 
-    @FXML
-    private TextField nombres, apellidos, usuario, cedula, direccion, telefono, correo, matricula;
+/**
+ * FXML Controller class
+ *
+ * @author Diego
+ */
+public class RegistrosUsuarios implements Initializable {
+
     @FXML
     private AnchorPane registrosUsuarios;
     @FXML
-    private ComboBox<String> perfil;
+    private TextField cedula;
     @FXML
-    private CheckBox ws_si, ws_no;
+    private TextField usuario;
+    @FXML
+    private TextField matricula;
+    @FXML
+    private TextField nombres;
+    @FXML
+    private TextField correo;
+    @FXML
+    private Label extension;
+    @FXML
+    private TextField direccion;
+    @FXML
+    private TextField telefono;
+    @FXML
+    private TextField apellidos;
+    @FXML
+    private CheckBox ws_si;
+    @FXML
+    private CheckBox ws_no;
+    @FXML
+    private ComboBox<String> perfil;
     @FXML
     private TextField contrasenia;
     @FXML
     private TextField confiContra;
-    @FXML
-    private Label extension;
 
-    public void initialize() {
-        perfil.getItems().removeAll(perfil.getItems());
-        perfil.getItems().add("VENDEDOR");
-        perfil.getItems().add("COMPRADOR");
-
+    /**
+     * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        perfil.getItems().addAll("VENDEDOR","COMPRADOR");
     }
 
     @FXML
-    public void registrar() throws IOException {
+    public void registrar() throws IOException{
         if (!verificarCampos()) {
-            alerta = new Alert(Alert.AlertType.CONFIRMATION);
-            alerta.setTitle("Confirmacion");
-            alerta.setHeaderText("Confirmacion de Registro");
-            alerta.setContentText("¿Está seguro de que desea realizar este registro?");
-            alerta.showAndWait();
-            if (alerta.getResult() == ButtonType.OK) {
-                registrarEstudiante();
-                AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/ventanaPrincipal.fxml"));
-                this.registrosUsuarios.getChildren().setAll(pane);
-            }
+            registrarEstudiante();
+            AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/ventanaPrincipal.fxml"));
+            this.registrosUsuarios.getChildren().setAll(pane);
         } else {
-            alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setTitle("Error");
-            alerta.setHeaderText("Campos Vacios");
-            alerta.setContentText("Revise los campos puede que alguno este vacio");
-            alerta.showAndWait();
+            mostrar_mensaje("Error en el registro", "Cuenta con campos vacios, reviselos porfavor.", AlertType.ERROR);
         }
     }
 
     private Estudiante crearEstudiante() {
-        Estudiante e;
-        if (this.perfil.selectionModelProperty().getValue().getSelectedItem().equals("VENDEDOR")) {
-            e = new Vendedor();
+        Estudiante e = new Estudiante(cedula.getText(), nombres.getText(), apellidos.getText());
+        if (this.perfil.getValue().equals("VENDEDOR")) {
+            e = new Vendedor(cedula.getText(), nombres.getText(), apellidos.getText());
 
+        } else if (this.perfil.getValue().equals("COMPRADOR")) {
+            e = new Comprador(cedula.getText(), nombres.getText(), apellidos.getText());
         } else {
-            e = new Comprador();
+            e = new Administrador(cedula.getText(), nombres.getText(), apellidos.getText());
         }
-        e.setCedula(this.cedula.getText());
         e.setMatricula(this.matricula.getText());
-        e.setNombre(this.nombres.getText());
-        e.setApellido(this.apellidos.getText());
         e.setNombreU(this.usuario.getText());
         e.setContrasenia(this.contrasenia.getText());
         e.setTelefono(this.telefono.getText());
         e.setWhatsapp(this.ws_si.isSelected());
+        e.setDireccion(direccion.getText());
         e.setEliminadoE(false);
-        e.setEmail(this.correo.getText() + this.extension.getText());
+        e.setEmail(this.correo.getText());
         e.setSaldo(0);
         return e;
     }
 
-    private void registrarEstudiante() {
-        this.estudianteDAO = new EstudianteDAO(conexion);
-        estudianteDAO.registrarEstudiante(crearEstudiante());
+    private void registrarEstudiante(){
+        Estudiante e = crearEstudiante();
+        EstudianteDAO.registrarEstudiante(e);
+        if(!existeEstudiante(e)){
+            mostrar_mensaje("REGISTRO EXITOSO", "HA SIDO REGISTRADO CORRECTAMENTE",AlertType.INFORMATION);
+        }else{
+            mostrar_mensaje("ACTUALIZACIÓN EXITOSO", "EL USUARIO HA SIDO ACTUALIZADO CORRECTAMENTE",AlertType.INFORMATION);
+        }
     }
 
     private boolean verificarCampos() {
-        boolean comprobacion = this.cedula.getText().equals("") && this.matricula.getText().equals("")
-                && this.nombres.getText().equals("") && this.apellidos.getText().equals("")
-                && this.usuario.getText().equals("") && this.telefono.getText().equals("")
-                && this.contrasenia.getText().equals("") && this.confiContra.getText().equals("")
-                && (this.ws_si.isSelected() || this.ws_no.isSelected()) && this.correo.getText().equals("")
-                && this.direccion.getText().equals("");
+        boolean comprobacion = this.cedula.getText().equals("") || this.matricula.getText().equals("")
+                || this.nombres.getText().equals("") ||  this.apellidos.getText().equals("")
+                ||  this.usuario.getText().equals("") ||  this.telefono.getText().equals("")
+                ||  this.contrasenia.getText().equals("") ||  this.confiContra.getText().equals("")
+                ||  !(this.ws_si.isSelected() || this.ws_no.isSelected()) ||  this.correo.getText().equals("")
+                ||  this.direccion.getText().equals("") || this.perfil.getValue().equals("");
         return comprobacion;
     }
 
-    @FXML
-    private void retroceder(MouseEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/ventanaPrincipal.fxml"));
-        this.registrosUsuarios.getChildren().setAll(pane);
+    private void mostrar_mensaje(String texto1, String texto2, AlertType tipo) {
+
+        Alert alert = new Alert(tipo);
+        alert.setTitle(texto1);
+        alert.setHeaderText(null);
+        alert.setContentText(texto2);
+        alert.showAndWait();
     }
-*/
+
+    private boolean existeEstudiante(Estudiante e){
+        return EstudianteDAO.verificarEstudiante(e);
+    }
+
+    @FXML
+    private void retroceder(MouseEvent event) {
+    }
+
 }

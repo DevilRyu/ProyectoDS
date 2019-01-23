@@ -4,12 +4,11 @@
  * and open the template in the editor.
  */
 package Controladores;
-/*
-import DAO.ProductoDAO;
-import DataBase.Conexion;
-import Modelos.Producto;
 
+import DAO.ProductoDAO;
+import Modelos.Producto;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,13 +16,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-*/
-public class TopArticulos  {
-    /*
-    private ProductoDAO productoDAO;
-    private Conexion conexion = Conexion.getInstance();
+/**
+ * FXML Controller class
+ *
+ * @author Diego
+ */
+public class TopArticulos implements Initializable {
 
     @FXML
     private AnchorPane top_articulos;
@@ -35,18 +36,30 @@ public class TopArticulos  {
     private TableColumn<Producto, String> columnaCategoria;
     @FXML
     private TableColumn<Producto, Double> columnaPrecio;
-    @FXML
-    private TableColumn<?, ?> numArticulo;
 
+    private ArrayList<Producto> articulos = new ArrayList<Producto>();
+    private ObservableList<Producto> lista = FXCollections.observableArrayList();
+
+    /**
+     * Initializes the controller class.
+     * @param url
+     * @param rb
+     */
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
         mostrarArticulosMasBsucados();
-    }    
-    
-    private void mostrarArticulosMasBsucados(){
-        productoDAO = new ProductoDAO(conexion);
-        ObservableList<Producto> articulos = FXCollections.observableArrayList();
-        productoDAO.articulosMasBuscados(articulos);
-        tablaArticulosMasBuscados.setItems(articulos);
+    } 
+    private void mostrarArticulosMasBsucados() {
+        articulos = ProductoDAO.articulosMasBuscados();
+        actualizarLista();
+        tablaArticulosMasBuscados.setItems(lista);
     }
-    */
+
+    private void actualizarLista() {
+        lista.clear();
+        lista.addAll(articulos);
+        columnaProducto.setCellValueFactory(new PropertyValueFactory<Producto,String>("nombre"));
+        columnaCategoria.setCellValueFactory(new PropertyValueFactory<Producto,String>("categoria"));
+        columnaPrecio.setCellValueFactory(new PropertyValueFactory<Producto,Double>("precio"));
+    }
 }

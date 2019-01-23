@@ -1,8 +1,6 @@
 package Controladores;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Optional;
 
 import DAO.ProductoDAO;
 import DAO.VendedorDAO;
@@ -12,9 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -57,11 +53,12 @@ public class AdministrarProductos {
 		this.cb_categoria.getItems().addAll(categorias);
 		this.cb_categoria.getSelectionModel().selectFirst();
 		actualizarLista();
-		checkListView = new CheckListView<>(list);
+		this.checkListView = new CheckListView<String>(list);
 		checkListView.setLayoutX(350);
 		checkListView.setLayoutY(232);
 		checkListView.setPrefSize(181, 250);
 		checkListView.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>() {
+                        @Override
 			public void onChanged(ListChangeListener.Change<? extends String> c) {
 				lstCheck = checkListView.getCheckModel().getCheckedItems();
 
@@ -122,18 +119,12 @@ public class AdministrarProductos {
 		Producto a = new Producto(producto.getText(), descripcion.getText(), cb_categoria.getValue(), 0,
 				Float.parseFloat(precio.getText()), Integer.parseInt(cantidad.getText()));
 		data = ProductoDAO.verificar_producto(a);
-		if (data.size() >= 1) {
-			return true;
-		}
-		return false;
+		return data.size() >= 1;
 	}
 
 	private boolean validar() {
-		if (!producto.getText().equals("") && !cantidad.getText().equals("0") && !precio.getText().equals("0")
-				&& !descripcion.getText().equals("") && isNumeric(precio.getText()) && isNumeric(cantidad.getText())) {
-			return true;
-		}
-		return false;
+		return !producto.getText().equals("") && !cantidad.getText().equals("0") && !precio.getText().equals("0")
+                        && !descripcion.getText().equals("") && isNumeric(precio.getText()) && isNumeric(cantidad.getText());
 	}
 
 	@FXML
