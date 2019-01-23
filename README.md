@@ -28,6 +28,16 @@ Password:
 Usuario: admin
 Password:
 ```
+3 - Prototipo funcional
+---------------
+Se desarrolló la implementación del proyecto en JavaFX con la ayuda de SceneBuilder. La base de datos fue elaborada en MySQL y estuvo alojada remotamente.
+
+*Librerias utilizadas:
+
+```
+Controlsfx-8.40.14: Proporciona controles que no estan incluidos en javaFx
+Mysql-connector-java-8.0.14 : Para establecer conexion entre la aplicacion y la base de datos.
+```
 
 ```
 NOTA: Solo ingresando con alguno de los nombres de usuario ya mencionados se podrá iniciar una sesión.
