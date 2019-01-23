@@ -32,7 +32,7 @@ Password:
 ---------------
 Se desarrolló la implementación del proyecto en JavaFX con la ayuda de SceneBuilder. La base de datos fue elaborada en MySQL y estuvo alojada remotamente.
 
-*Librerias utilizadas:
+* Librerias utilizadas:
 
 ```
 Controlsfx-8.40.14: Proporciona controles que no estan incluidos en javaFx
