@@ -1,62 +1,117 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
-import Modelos.Producto;
-import conexion.Conexion;
-import java.sql.PreparedStatement;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import DataBase.GestionarBase;
+import Modelos.Producto;
 
 /**
  *
- * @author Diego
+ * @author creditos
  */
 public class ProductoDAO {
-    
-    private final Conexion conexion;
-    private Alert alerta;
-    
-    public ProductoDAO(Conexion conexion){
-        this.conexion = conexion;
-    }
-    
-    public ObservableList<Producto> articulosMasBuscados(ObservableList<Producto> articulos) {
-        conexion.obtener();
-        try {
-            PreparedStatement consulta = conexion.getCnx().prepareStatement("SELECT * FROM "
-                    + "producto WHERE eliminadoP <> true ORDER BY contadorBusqueda");
-            ResultSet resultados = consulta.executeQuery();
-            while (resultados.next()) {
-                Producto producto = new Producto();
-                producto.setIdProducto(resultados.getString("producto.idProducto"));
-                producto.setCodProducto(resultados.getString("producto.codProducto"));
-                producto.setNombre(resultados.getString("producto.nombre"));
-                producto.setDescripcion(resultados.getString("producto.descripcion"));
-                producto.setCategoria(resultados.getString("producto.categoria"));
-                producto.setTiempoMax(resultados.getDate("producto.tiempoMax"));
-                producto.setContadorBusqueda(resultados.getInt("producto.contadorBusqueda"));
-                producto.setFechaIngreso(resultados.getDate("producto.fechaIngreso"));
-                producto.setCalificacionPP(resultados.getDouble("producto.calificacionPP"));
-                producto.setPrecio(resultados.getDouble("producto.precio"));
-                producto.setEliminadoP(resultados.getBoolean("producto.eliminadoP"));
-                producto.setIdAdmin(resultados.getString("producto.idAdmin"));
-                producto.setIdVendedor(resultados.getString("producto.idVendedor"));
-                articulos.add(producto);
-            }
-            conexion.cerrar();
-        } catch (SQLException ex) {
-            alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setTitle("Error");
-            alerta.setHeaderText("Error de Conección");
-            alerta.setContentText("Revise el estado del servidor");
-            alerta.showAndWait();
-        }
-        return articulos;
-    }
+
+	public static void registrar_producto(Producto a) {
+		GestionarBase.crearprocedimiento("{call registrar_producto(?,?,?,?,?,?)}");
+		GestionarBase.asignarparametrosInt(1, a.getIdProducto());
+		GestionarBase.asignarparametrosString(2, a.getNombre());
+		GestionarBase.asignarparametrosString(3, a.getDescripcion());
+		GestionarBase.asignarparametrosString(4, a.getCategoria());
+		GestionarBase.asignarparametrosFloat(5, a.getPrecio());
+		GestionarBase.asignarparametrosInt(6,a.getCantidad());
+		
+		GestionarBase.ejecutarprocedimiento();
+		GestionarBase.cerrar();
+	}
+	
+	public static ArrayList<Producto> obtener_productos() {
+
+		ArrayList <Producto> arreglo  = new ArrayList<Producto>();
+		ResultSet r;
+		GestionarBase.crearprocedimiento("{call obtener_productos()}");
+		GestionarBase.ejecutarprocedimiento();
+		r = GestionarBase.obtenerprocedmiento();
+		try {
+			while (r.next()) {
+				Producto d;
+				d = new Producto(r.getString("nombre"), r.getString("descripcion"),r.getString("categoria"),r.getInt("idProducto"),r.getFloat("precio"),
+						r.getString("idAdmin"),r.getString("idVendedor"),r.getInt("cantidad"));
+				
+				arreglo.add(d);
+              
+			}
+
+			r.close();
+		} catch (SQLException ex) {
+			Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		GestionarBase.cerrar();
+		return arreglo;
+	}
+
+	
+	public static ArrayList<Producto> verificar_producto(Producto a) {
+
+		ArrayList <Producto> arreglo  = new ArrayList<Producto>();
+		ResultSet r;
+		GestionarBase.crearprocedimiento("{call verificar_productos(?)}");
+		GestionarBase.asignarparametrosString(1,a.getNombre());
+		GestionarBase.ejecutarprocedimiento();
+		r = GestionarBase.obtenerprocedmiento();
+		try {
+			while (r.next()) {
+			Producto d = new Producto(r.getString("nombre"), r.getString("descripcion"),r.getString("categoria"),r.getInt("idProducto"),r.getFloat("precio"),
+			r.getString("idAdmin"),r.getString("idVendedor"),r.getInt("cantidad"));
+			arreglo.add(d);
+			}
+
+			r.close();
+		} catch (SQLException ex) {
+			Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		GestionarBase.cerrar();
+		return arreglo;
+	}
+	
+	public static ArrayList<Producto> obtener_productosVendedor(String a) {
+
+		ArrayList <Producto> arreglo  = new ArrayList<Producto>();
+		ResultSet r;
+		GestionarBase.crearprocedimiento("{call obtener_productosVendedor(?)}");
+		GestionarBase.asignarparametrosString(1,a);
+		GestionarBase.ejecutarprocedimiento();
+		r = GestionarBase.obtenerprocedmiento();
+		try {
+			while (r.next()) {
+				
+				Producto d;
+				d = new Producto(r.getString("nombre"), r.getString("descripcion"),r.getString("categoria"),r.getInt("idProducto"),r.getFloat("precio"),
+						r.getString("idAdmin"),r.getString("idVendedor"),r.getInt("cantidad"));
+                   
+                arreglo.add(d);
+			}
+
+			r.close();
+		} catch (SQLException ex) {
+			Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		GestionarBase.cerrar();
+		return arreglo;
+	}
+	
+	public static void eliminar_producto(String a,String b) {
+		GestionarBase.crearprocedimiento("{call eliminar_producto(?,?)}");
+		GestionarBase.asignarparametrosString(1,a);
+		GestionarBase.asignarparametrosString(2,b);
+		GestionarBase.ejecutarprocedimiento();
+		GestionarBase.cerrar();
+		
+	}
+	
+	
 }

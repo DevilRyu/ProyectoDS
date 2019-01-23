@@ -10,9 +10,12 @@ package Modelos;
  * @author Diego
  */
 public class Comprador extends Estudiante {
+
+	public Comprador(String cedula, String nombre, String apellido) {
+		super(cedula, nombre, apellido);
+		// TODO Auto-generated constructor stub
+	}
     
-    public Comprador(){
-        super();
-    }
+   
     
 }

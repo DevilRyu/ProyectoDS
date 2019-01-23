@@ -9,13 +9,18 @@ package Modelos;
  *
  * @author Diego
  */
-public class Vendedor extends Comprador{
+public class Vendedor extends Estudiante{
     
-    private double calificacionPV;
+	
+    public Vendedor(String cedula, String nombre, String apellido) {
+		super(cedula, nombre, apellido);
+	}
+
+	private double calificacionPV;
     
-    public Vendedor(){
-        super();
-    }
+    
+   
+    
 
     public double getCalificacionPV() {
         return calificacionPV;

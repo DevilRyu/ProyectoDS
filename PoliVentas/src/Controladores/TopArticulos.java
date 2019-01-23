@@ -4,10 +4,11 @@
  * and open the template in the editor.
  */
 package Controladores;
-
+/*
 import DAO.ProductoDAO;
+import DataBase.Conexion;
 import Modelos.Producto;
-import conexion.Conexion;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -18,13 +19,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 
-/**
- * FXML Controller class
- *
- * @author Diego
- */
-public class TopArticulos implements Initializable {
-    
+*/
+public class TopArticulos  {
+    /*
     private ProductoDAO productoDAO;
     private Conexion conexion = Conexion.getInstance();
 
@@ -41,12 +38,6 @@ public class TopArticulos implements Initializable {
     @FXML
     private TableColumn<?, ?> numArticulo;
 
-    /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb
-     */
-    @Override
     public void initialize(URL url, ResourceBundle rb) {
         mostrarArticulosMasBsucados();
     }    
@@ -57,4 +48,5 @@ public class TopArticulos implements Initializable {
         productoDAO.articulosMasBuscados(articulos);
         tablaArticulosMasBuscados.setItems(articulos);
     }
+    */
 }

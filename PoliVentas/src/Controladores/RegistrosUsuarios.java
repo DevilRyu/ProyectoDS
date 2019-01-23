@@ -1,10 +1,11 @@
 package Controladores;
-
+/*
 import DAO.EstudianteDAO;
+import DataBase.Conexion;
 import Modelos.Comprador;
 import Modelos.Estudiante;
 import Modelos.Vendedor;
-import conexion.Conexion;
+
 import java.io.IOException;
 
 import javafx.fxml.FXML;
@@ -17,9 +18,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-
+*/
 public class RegistrosUsuarios {
-
+/*
     private EstudianteDAO estudianteDAO;
     private Conexion conexion = Conexion.getInstance();
     private Alert alerta;
@@ -110,5 +111,5 @@ public class RegistrosUsuarios {
         AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/ventanaPrincipal.fxml"));
         this.registrosUsuarios.getChildren().setAll(pane);
     }
-
+*/
 }

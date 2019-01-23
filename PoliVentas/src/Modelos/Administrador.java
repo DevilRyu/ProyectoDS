@@ -10,9 +10,11 @@ package Modelos;
  * @author Diego
  */
 public class Administrador extends Estudiante {
+
+	public Administrador(String cedula, String nombre, String apellido) {
+		super(cedula, nombre, apellido);
+		// TODO Auto-generated constructor stub
+	}
     
-    public Administrador(){
-        super();
-    }
-    
+   
 }

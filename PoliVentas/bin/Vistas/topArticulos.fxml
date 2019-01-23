@@ -9,20 +9,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="top_articulos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="top_articulos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.TopArticulos">
    <children>
       <Label layoutX="188.0" layoutY="28.0" prefHeight="41.0" prefWidth="298.0" text="ARTICULOS MAS BUSCADOS" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>
       </Label>
-      <TableView layoutX="105.0" layoutY="112.0" prefHeight="183.0" prefWidth="435.0">
+      <TableView fx:id="tablaArticulosMasBuscados" layoutX="105.0" layoutY="112.0" prefHeight="183.0" prefWidth="435.0">
          <columns>
-            <TableColumn prefWidth="29.0" text="#" />
-            <TableColumn prefWidth="166.0" text="Producto" />
-            <TableColumn prefWidth="166.0" text="Categoria" />
-            <TableColumn prefWidth="72.0" text="Precio" />
+            <TableColumn fx:id="numArticulo" prefWidth="29.0" text="#" />
+            <TableColumn fx:id="columnaProducto" prefWidth="166.0" text="Producto" />
+            <TableColumn fx:id="columnaCategoria" prefWidth="166.0" text="Categoria" />
+            <TableColumn fx:id="columnaPrecio" prefWidth="72.0" text="Precio" />
          </columns>
       </TableView>
       <Button layoutX="270.0" layoutY="317.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="106.0" text="Comprar" textAlignment="CENTER" textOverrun="CLIP">

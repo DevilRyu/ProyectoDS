@@ -25,7 +25,15 @@ public class Estudiante {
     private double saldo;
     
 
-    public String getCedula() {
+
+    
+    public Estudiante(String cedula, String nombre, String apellido) {
+		this.cedula = cedula;
+		this.nombre = nombre;
+		this.apellido = apellido;
+	}
+
+	public String getCedula() {
         return cedula;
     }
 

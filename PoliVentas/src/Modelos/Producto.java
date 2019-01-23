@@ -12,125 +12,162 @@ import java.sql.Date;
  * @author Diego
  */
 public class Producto {
-    
-    private String idProducto;
-    private String codProducto;
-    private String nombre;
-    private String descripcion;
-    private String categoria;
-    private Date tiempoMax;
-    private int contadorBusqueda;
-    private Date fechaIngreso;
-    private double calificacionPP;
-    private double precio;
-    private boolean eliminadoP;
-    private String idAdmin;
-    private String idVendedor;
 
-    public String getIdProducto() {
-        return idProducto;
-    }
+	
+	private String codProducto;
+	private String nombre;
+	private String descripcion;
+	private String categoria;
+	private Date tiempoMax;
+	private int contadorBusqueda;
+	private Date fechaIngreso;
+	private int idProducto;
+	private float calificacionPP;
+	private float precio;
+	private boolean eliminadoP;
+	private String idAdmin;
+	private String idVendedor;
+	private int cantidad;
 
-    public double getCalificacionPP() {
-        return calificacionPP;
-    }
+	public Producto(String nombre, String descripcion, String categoria, int idProducto, float precio, int cantidad) {
+		super();
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.categoria = categoria;
+		this.idProducto = idProducto;
+		this.precio = precio;
+		this.cantidad = cantidad;
+	}
 
-    public void setCalificacionPP(double calificacionPP) {
-        this.calificacionPP = calificacionPP;
-    }
+	
+	
+	public Producto(String nombre, String descripcion, String categoria, int idProducto, float precio, String idAdmin,
+			String idVendedor, int cantidad) {
+		super();
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.categoria = categoria;
+		this.idProducto = idProducto;
+		this.precio = precio;
+		this.idAdmin = idAdmin;
+		this.idVendedor = idVendedor;
+		this.cantidad = cantidad;
+	}
 
-    public void setIdProducto(String idProducto) {
-        this.idProducto = idProducto;
-    }
 
-    public String getCodProducto() {
-        return codProducto;
-    }
 
-    public void setCodProducto(String codProducto) {
-        this.codProducto = codProducto;
-    }
+	public String getCodProducto() {
+		return codProducto;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public void setCodProducto(String codProducto) {
+		this.codProducto = codProducto;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+	public String getDescripcion() {
+		return descripcion;
+	}
 
-    public String getCategoria() {
-        return categoria;
-    }
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
+	public String getCategoria() {
+		return categoria;
+	}
 
-    public Date getTiempoMax() {
-        return tiempoMax;
-    }
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
 
-    public void setTiempoMax(Date tiempoMax) {
-        this.tiempoMax = tiempoMax;
-    }
+	public Date getTiempoMax() {
+		return tiempoMax;
+	}
 
-    public int getContadorBusqueda() {
-        return contadorBusqueda;
-    }
+	public void setTiempoMax(Date tiempoMax) {
+		this.tiempoMax = tiempoMax;
+	}
 
-    public void setContadorBusqueda(int contadorBusqueda) {
-        this.contadorBusqueda = contadorBusqueda;
-    }
+	public int getContadorBusqueda() {
+		return contadorBusqueda;
+	}
 
-    public Date getFechaIngreso() {
-        return fechaIngreso;
-    }
+	public void setContadorBusqueda(int contadorBusqueda) {
+		this.contadorBusqueda = contadorBusqueda;
+	}
 
-    public void setFechaIngreso(Date fechaIngreso) {
-        this.fechaIngreso = fechaIngreso;
-    }
+	public Date getFechaIngreso() {
+		return fechaIngreso;
+	}
 
-    public double getPrecio() {
-        return precio;
-    }
+	public void setFechaIngreso(Date fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
+	}
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
 
-    public boolean isEliminadoP() {
-        return eliminadoP;
-    }
 
-    public void setEliminadoP(boolean eliminadoP) {
-        this.eliminadoP = eliminadoP;
-    }
+	public boolean isEliminadoP() {
+		return eliminadoP;
+	}
 
-    public String getIdAdmin() {
-        return idAdmin;
-    }
+	public void setEliminadoP(boolean eliminadoP) {
+		this.eliminadoP = eliminadoP;
+	}
 
-    public void setIdAdmin(String idAdmin) {
-        this.idAdmin = idAdmin;
-    }
+	public String getIdAdmin() {
+		return idAdmin;
+	}
 
-    public String getIdVendedor() {
-        return idVendedor;
-    }
+	public void setIdAdmin(String idAdmin) {
+		this.idAdmin = idAdmin;
+	}
 
-    public void setIdVendedor(String idVendedor) {
-        this.idVendedor = idVendedor;
-    }
-    
-    
-    
+	public String getIdVendedor() {
+		return idVendedor;
+	}
+
+	public void setIdVendedor(String idVendedor) {
+		this.idVendedor = idVendedor;
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public int getIdProducto() {
+		return idProducto;
+	}
+
+	public void setIdProducto(int idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public float getCalificacionPP() {
+		return calificacionPP;
+	}
+
+	public void setCalificacionPP(float calificacionPP) {
+		this.calificacionPP = calificacionPP;
+	}
+
+	public float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(float precio) {
+		this.precio = precio;
+	}
+
 }
