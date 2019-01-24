@@ -5,11 +5,18 @@
  */
 package Controladores;
 
+import DAO.EstudianteDAO;
+import Modelos.Administrador;
+import Modelos.Comprador;
+import Modelos.Estudiante;
+import Modelos.Vendedor;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -46,35 +53,157 @@ public class AdministrarUsuarios implements Initializable {
     @FXML
     private CheckBox ws_no;
     @FXML
-    private ComboBox<?> perfil;
+    private ComboBox<String> perfil;
     @FXML
     private TextField nombres;
     @FXML
     private TextField apellidos;
     @FXML
-    private Button crearActualizar;
-    @FXML
     private Button eliminar;
+    @FXML
+    private Button Actualizar;
+
+    Alert alerta;
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        perfil.getItems().addAll("Administrador", "Vendedor", "Comprador");
+    }
 
     @FXML
     private void consultar(KeyEvent event) {
+        if (event.getCode().toString().equals("ENTER") && !this.cedula.getText().equals("")) {
+            mostrarInformacion();
+        }
+    }
+
+    private void mostrarInformacion() {
+        Estudiante e = EstudianteDAO.consultarEstudiante(cedula.getText());
+        if (e.isEliminadoE()) {
+            mostrar_mensaje("USUARIO NO ENCONTRADO", "ESTE USUARIO FUE ELIMINADO DEL SISTEMA", Alert.AlertType.INFORMATION);
+        } else {
+            this.usuario.setText(e.getNombreU());
+            this.telefono.setText(e.getTelefono());
+            this.apellidos.setText(e.getApellido());
+            this.correo.setText(e.getEmail());
+            this.matricula.setText(e.getMatricula());
+            this.nombres.setText(e.getNombre());
+            this.direccion.setText(e.getDireccion());
+            if (e.isWhatsapp()) {
+                this.ws_si.selectedProperty().setValue(Boolean.TRUE);
+            } else {
+                this.ws_si.selectedProperty().setValue(Boolean.FALSE);
+                this.ws_no.selectedProperty().setValue(Boolean.TRUE);
+            }
+            this.perfil.setValue(e.getClass().getSimpleName());
+        }
     }
 
     @FXML
     private void crearActualizar(MouseEvent event) {
-        
+        if (!verificarCampos()) {
+            actualizarEstudiante();
+        } else {
+            mostrar_mensaje("Error en el registro", "Cuenta con campos vacios, reviselos porfavor.", Alert.AlertType.ERROR);
+        }
+
+    }
+
+    private boolean verificarCampos() {
+        boolean comprobacion = this.cedula.getText().equals("") || this.matricula.getText().equals("")
+                || this.nombres.getText().equals("") || this.apellidos.getText().equals("")
+                || this.usuario.getText().equals("") || this.telefono.getText().equals("")
+                || !(this.ws_si.isSelected() || this.ws_no.isSelected()) || this.correo.getText().equals("")
+                || this.direccion.getText().equals("") || this.perfil.getSelectionModel().isEmpty();
+        return comprobacion;
+    }
+
+    private void mostrar_mensaje(String texto1, String texto2, Alert.AlertType tipo) {
+
+        Alert alert = new Alert(tipo);
+        alert.setTitle(texto1);
+        alert.setHeaderText(null);
+        alert.setContentText(texto2);
+        alert.showAndWait();
+    }
+
+    private void actualizarEstudiante() {
+        Estudiante e = crearEstudiante();
+        if (existeEstudiante(e)) {
+            alerta = new Alert(Alert.AlertType.CONFIRMATION);
+            alerta.setTitle("Confirmacion");
+            alerta.setHeaderText("Confirmacion de Actualización");
+            alerta.setContentText("¿Está seguro de que desea actualizar este usuario?");
+            alerta.showAndWait();
+            if (alerta.getResult() == ButtonType.OK) {
+                EstudianteDAO.actualizarEstudiante(e);
+                mostrar_mensaje("ACTUALIZACIÓN EXITOSA", "EL USUARIO HA SIDO ACTUALIZADO CORRECTAMENTE", Alert.AlertType.INFORMATION);
+            }
+
+        }
+    }
+
+    private boolean existeEstudiante(Estudiante e) {
+        return EstudianteDAO.verificarEstudiante(e);
+    }
+
+    private Estudiante crearEstudiante() {
+        Estudiante e;
+        if (this.perfil.getValue().equals("Vendedor")) {
+            e = new Vendedor(cedula.getText(), nombres.getText(), apellidos.getText());
+
+        } else if (this.perfil.getValue().equals("Comprador")) {
+            e = new Comprador(cedula.getText(), nombres.getText(), apellidos.getText());
+        } else {
+            e = new Administrador(cedula.getText(), nombres.getText(), apellidos.getText());
+        }
+        e.setMatricula(this.matricula.getText());
+        e.setNombreU(this.usuario.getText());
+        e.setTelefono(this.telefono.getText());
+        e.setWhatsapp(this.ws_si.isSelected());
+        e.setDireccion(direccion.getText());
+        e.setEliminadoE(false);
+        e.setEmail(this.correo.getText());
+        e.setSaldo(0);
+        return e;
     }
 
     @FXML
     private void eliminarEstudiante(MouseEvent event) {
+        if (!this.cedula.getText().equals("")) {
+            alerta = new Alert(Alert.AlertType.CONFIRMATION);
+            alerta.setTitle("Confirmacion");
+            alerta.setHeaderText("Confirmacion de Eliminación");
+            alerta.setContentText("¿Está seguro de que desea eliminar este usuario?");
+            alerta.showAndWait();
+            if (alerta.getResult() == ButtonType.OK) {
+                EstudianteDAO.eliminarEstudiante(cedula.getText());
+                vaciarCampos();
+                mostrar_mensaje("ELIMINACIÓN EXISTOSA", "LA ELIMINACIÓN SE HA REALIZADO CORRECTAMENTE", Alert.AlertType.INFORMATION);
+            }
+        } else {
+            mostrar_mensaje("Error en la eliminación", "No ha especificado el usuario que desea eliminar", Alert.AlertType.ERROR);
+        }
     }
-    
+
+    private void vaciarCampos() {
+        this.apellidos.setText("");
+        this.cedula.setText("");
+        this.correo.setText("");
+        this.direccion.setText("");
+        this.matricula.setText("");
+        this.nombres.setText("");
+        this.perfil.setValue("");
+        this.telefono.setText("");
+        this.usuario.setText("");
+        this.ws_no.setSelected(false);
+        this.ws_si.setSelected(false);
+    }
+
 }

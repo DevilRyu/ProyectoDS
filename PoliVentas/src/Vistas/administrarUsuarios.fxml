@@ -89,7 +89,7 @@
       <ComboBox fx:id="perfil" layoutX="434.0" layoutY="206.0" prefHeight="26.0" prefWidth="160.0" promptText="COMPRADOR" />
       <TextField fx:id="nombres" layoutX="151.0" layoutY="134.0" prefHeight="26.0" prefWidth="160.0" />
       <TextField fx:id="apellidos" layoutX="430.0" layoutY="134.0" prefHeight="26.0" prefWidth="160.0" />
-      <Button fx:id="crearActualizar" layoutX="253.0" layoutY="238.0" mnemonicParsing="false" onMouseClicked="#crearActualizar" prefHeight="34.0" prefWidth="157.0" text="Crear/Actualizar" textAlignment="CENTER" textOverrun="CLIP">
+      <Button fx:id="Actualizar" layoutX="291.0" layoutY="233.0" mnemonicParsing="false" onMouseClicked="#crearActualizar" prefHeight="34.0" prefWidth="116.0" text="Actualizar" textAlignment="CENTER" textOverrun="CLIP">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>

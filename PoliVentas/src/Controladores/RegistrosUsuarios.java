@@ -12,9 +12,7 @@ import Modelos.Estudiante;
 import Modelos.Vendedor;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -73,26 +71,24 @@ public class RegistrosUsuarios implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        perfil.getItems().addAll("VENDEDOR","COMPRADOR");
+        perfil.getItems().addAll("Vendedor", "Comprador");
     }
 
     @FXML
-    public void registrar() throws IOException{
+    public void registrar() throws IOException {
         if (!verificarCampos()) {
             registrarEstudiante();
-            AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/ventanaPrincipal.fxml"));
-            this.registrosUsuarios.getChildren().setAll(pane);
         } else {
             mostrar_mensaje("Error en el registro", "Cuenta con campos vacios, reviselos porfavor.", AlertType.ERROR);
         }
     }
 
     private Estudiante crearEstudiante() {
-        Estudiante e = new Estudiante(cedula.getText(), nombres.getText(), apellidos.getText());
-        if (this.perfil.getValue().equals("VENDEDOR")) {
+        Estudiante e;
+        if (this.perfil.getValue().equals("Vendedor")) {
             e = new Vendedor(cedula.getText(), nombres.getText(), apellidos.getText());
 
-        } else if (this.perfil.getValue().equals("COMPRADOR")) {
+        } else if (this.perfil.getValue().equals("Comprador")) {
             e = new Comprador(cedula.getText(), nombres.getText(), apellidos.getText());
         } else {
             e = new Administrador(cedula.getText(), nombres.getText(), apellidos.getText());
@@ -109,23 +105,25 @@ public class RegistrosUsuarios implements Initializable {
         return e;
     }
 
-    private void registrarEstudiante(){
+    private void registrarEstudiante() throws IOException {
         Estudiante e = crearEstudiante();
-        EstudianteDAO.registrarEstudiante(e);
-        if(!existeEstudiante(e)){
-            mostrar_mensaje("REGISTRO EXITOSO", "HA SIDO REGISTRADO CORRECTAMENTE",AlertType.INFORMATION);
-        }else{
-            mostrar_mensaje("ACTUALIZACIÓN EXITOSO", "EL USUARIO HA SIDO ACTUALIZADO CORRECTAMENTE",AlertType.INFORMATION);
+        if (!existeEstudiante(e)) {
+            EstudianteDAO.registrarEstudiante(e);
+            mostrar_mensaje("REGISTRO EXITOSO", "HA SIDO REGISTRADO CORRECTAMENTE", AlertType.INFORMATION);
+            AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/ventanaPrincipal.fxml"));
+            this.registrosUsuarios.getChildren().setAll(pane);
+        } else {
+            mostrar_mensaje("ERROR DE REGISTRO", "ESTE USUARIO YA EXISTE EN EL SISTEMA", AlertType.WARNING);
         }
     }
 
     private boolean verificarCampos() {
         boolean comprobacion = this.cedula.getText().equals("") || this.matricula.getText().equals("")
-                || this.nombres.getText().equals("") ||  this.apellidos.getText().equals("")
-                ||  this.usuario.getText().equals("") ||  this.telefono.getText().equals("")
-                ||  this.contrasenia.getText().equals("") ||  this.confiContra.getText().equals("")
-                ||  !(this.ws_si.isSelected() || this.ws_no.isSelected()) ||  this.correo.getText().equals("")
-                ||  this.direccion.getText().equals("") || this.perfil.getValue().equals("");
+                || this.nombres.getText().equals("") || this.apellidos.getText().equals("")
+                || this.usuario.getText().equals("") || this.telefono.getText().equals("")
+                || this.contrasenia.getText().equals("") || this.confiContra.getText().equals("")
+                || !(this.ws_si.isSelected() || this.ws_no.isSelected()) || this.correo.getText().equals("")
+                || this.direccion.getText().equals("") || this.perfil.getSelectionModel().isEmpty();
         return comprobacion;
     }
 
@@ -138,12 +136,14 @@ public class RegistrosUsuarios implements Initializable {
         alert.showAndWait();
     }
 
-    private boolean existeEstudiante(Estudiante e){
+    private boolean existeEstudiante(Estudiante e) {
         return EstudianteDAO.verificarEstudiante(e);
     }
 
     @FXML
-    private void retroceder(MouseEvent event) {
+    private void retroceder(MouseEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/ventanaPrincipal.fxml"));
+        this.registrosUsuarios.getChildren().setAll(pane);
     }
 
 }

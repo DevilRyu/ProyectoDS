@@ -17,7 +17,7 @@ import Modelos.Producto;
 public class ProductoDAO {
 
     public static void registrar_producto(Producto a) {
-        GestionarBase.crearprocedimiento("{call registrar_producto(?,?,?,?,?,?)}");
+        GestionarBase.llamarprocedimiento("{call registrar_producto(?,?,?,?,?,?)}");
         GestionarBase.asignarparametrosInt(1, a.getIdProducto());
         GestionarBase.asignarparametrosString(2, a.getNombre());
         GestionarBase.asignarparametrosString(3, a.getDescripcion());
@@ -33,7 +33,7 @@ public class ProductoDAO {
 
         ArrayList<Producto> arreglo = new ArrayList<Producto>();
         ResultSet r;
-        GestionarBase.crearprocedimiento("{call obtener_productos()}");
+        GestionarBase.llamarprocedimiento("{call obtener_productos()}");
         GestionarBase.ejecutarprocedimiento();
         r = GestionarBase.obtenerprocedmiento();
         try {
@@ -58,7 +58,7 @@ public class ProductoDAO {
 
         ArrayList<Producto> arreglo = new ArrayList<Producto>();
         ResultSet r;
-        GestionarBase.crearprocedimiento("{call verificar_productos(?)}");
+        GestionarBase.llamarprocedimiento("{call verificar_productos(?)}");
         GestionarBase.asignarparametrosString(1, a.getNombre());
         GestionarBase.ejecutarprocedimiento();
         r = GestionarBase.obtenerprocedmiento();
@@ -81,7 +81,7 @@ public class ProductoDAO {
 
         ArrayList<Producto> arreglo = new ArrayList<Producto>();
         ResultSet r;
-        GestionarBase.crearprocedimiento("{call obtener_productosVendedor(?)}");
+        GestionarBase.llamarprocedimiento("{call obtener_productosVendedor(?)}");
         GestionarBase.asignarparametrosString(1, a);
         GestionarBase.ejecutarprocedimiento();
         r = GestionarBase.obtenerprocedmiento();
@@ -104,7 +104,7 @@ public class ProductoDAO {
     }
 
     public static void eliminar_producto(String a, String b) {
-        GestionarBase.crearprocedimiento("{call eliminar_producto(?,?)}");
+        GestionarBase.llamarprocedimiento("{call eliminar_producto(?,?)}");
         GestionarBase.asignarparametrosString(1, a);
         GestionarBase.asignarparametrosString(2, b);
         GestionarBase.ejecutarprocedimiento();
@@ -115,7 +115,7 @@ public class ProductoDAO {
     public static ArrayList<Producto> articulosMasBuscados() {
         ArrayList<Producto> articulos  = new ArrayList();
         ResultSet r;
-        GestionarBase.crearprocedimiento("{call articulosMasBuscados()}");
+        GestionarBase.llamarprocedimiento("{call articulosMasBuscados()}");
         GestionarBase.ejecutarprocedimiento();
         r = GestionarBase.obtenerprocedmiento();
         try {

@@ -83,7 +83,7 @@ public class GestionarBase {
 
 	}
 
-	public static void crearprocedimiento(String sp) {
+	public static void llamarprocedimiento(String sp) {
 		conectar();
 		try {
 			procedimiento = con.prepareCall(sp);

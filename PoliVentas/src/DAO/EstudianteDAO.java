@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class EstudianteDAO {
 
     public static void registrarEstudiante(Estudiante e) {
-        GestionarBase.crearprocedimiento("{call registrarEstudiante(?,?,?,?,?,?,?,?,?,?,?,?)}");
+        GestionarBase.llamarprocedimiento("{call registrarEstudiante(?,?,?,?,?,?,?,?,?,?,?,?)}");
         GestionarBase.asignarparametrosString(1, e.getCedula());
         GestionarBase.asignarparametrosString(2, e.getMatricula());
         GestionarBase.asignarparametrosString(3, e.getNombre());
@@ -38,23 +38,62 @@ public class EstudianteDAO {
         GestionarBase.ejecutarprocedimiento();
         if (e instanceof Vendedor) {
             Vendedor v = (Vendedor) e;
-            GestionarBase.crearprocedimiento("{call registrarVendedor(?,?)}");
+            GestionarBase.llamarprocedimiento("{call registrarVendedor(?,?)}");
             GestionarBase.asignarparametrosString(1, e.getCedula());
             GestionarBase.asignarparametrosDouble(2, ((Vendedor) e).getCalificacionPV());
             GestionarBase.ejecutarprocedimiento();
-            GestionarBase.crearprocedimiento("{call agregarRol(?,?,?)}");
+            GestionarBase.llamarprocedimiento("{call agregarRol(?,?,?)}");
             GestionarBase.asignarparametrosString(1, e.getCedula());
             GestionarBase.asignarparametrosString(2, "1");
             GestionarBase.asignarparametrosString(3, "Vendedor");
             GestionarBase.ejecutarprocedimiento();
         } else if (e instanceof Administrador) {
-            GestionarBase.crearprocedimiento("{call agregarRol(?,?,?)}");
+            GestionarBase.llamarprocedimiento("{call agregarRol(?,?,?)}");
             GestionarBase.asignarparametrosString(1, e.getCedula());
             GestionarBase.asignarparametrosString(2, "0");
             GestionarBase.asignarparametrosString(3, "Administrador");
             GestionarBase.ejecutarprocedimiento();
         } else if (e instanceof Comprador) {
-            GestionarBase.crearprocedimiento("{call agregarRol(?,?,?)}");
+            GestionarBase.llamarprocedimiento("{call agregarRol(?,?,?)}");
+            GestionarBase.asignarparametrosString(1, e.getCedula());
+            GestionarBase.asignarparametrosString(2, "2");
+            GestionarBase.asignarparametrosString(3, "Comprador");
+            GestionarBase.ejecutarprocedimiento();
+        }
+        GestionarBase.cerrar();
+    }
+
+    public static void actualizarEstudiante(Estudiante e) {
+        GestionarBase.llamarprocedimiento("{call actualizarEstudiante(?,?,?,?,?,?,?,?,?)}");
+        GestionarBase.asignarparametrosString(1, e.getCedula());
+        GestionarBase.asignarparametrosString(9, e.getMatricula());
+        GestionarBase.asignarparametrosString(4, e.getNombre());
+        GestionarBase.asignarparametrosString(5, e.getApellido());
+        GestionarBase.asignarparametrosString(2, e.getNombreU());
+        GestionarBase.asignarparametrosString(3, e.getTelefono());
+        GestionarBase.asignarparametrosBoolean(8, e.isWhatsapp());
+        GestionarBase.asignarparametrosString(7, e.getEmail());
+        GestionarBase.asignarparametrosString(6, e.getDireccion());
+        GestionarBase.ejecutarprocedimiento();
+        if (e instanceof Vendedor) {
+            Vendedor v = (Vendedor) e;
+            GestionarBase.llamarprocedimiento("{call registrarVendedor(?,?)}");
+            GestionarBase.asignarparametrosString(1, e.getCedula());
+            GestionarBase.asignarparametrosDouble(2, ((Vendedor) e).getCalificacionPV());
+            GestionarBase.ejecutarprocedimiento();
+            GestionarBase.llamarprocedimiento("{call agregarRol(?,?,?)}");
+            GestionarBase.asignarparametrosString(1, e.getCedula());
+            GestionarBase.asignarparametrosString(2, "1");
+            GestionarBase.asignarparametrosString(3, "Vendedor");
+            GestionarBase.ejecutarprocedimiento();
+        } else if (e instanceof Administrador) {
+            GestionarBase.llamarprocedimiento("{call agregarRol(?,?,?)}");
+            GestionarBase.asignarparametrosString(1, e.getCedula());
+            GestionarBase.asignarparametrosString(2, "0");
+            GestionarBase.asignarparametrosString(3, "Administrador");
+            GestionarBase.ejecutarprocedimiento();
+        } else if (e instanceof Comprador) {
+            GestionarBase.llamarprocedimiento("{call agregarRol(?,?,?)}");
             GestionarBase.asignarparametrosString(1, e.getCedula());
             GestionarBase.asignarparametrosString(2, "2");
             GestionarBase.asignarparametrosString(3, "Comprador");
@@ -65,55 +104,56 @@ public class EstudianteDAO {
 
     public static boolean verificarEstudiante(Estudiante e) {
         ResultSet r;
-        GestionarBase.crearprocedimiento("{call verificarEstudiante(?)}");
+        GestionarBase.llamarprocedimiento("{call verificarEstudiante(?)}");
         GestionarBase.asignarparametrosString(1, e.getCedula());
         GestionarBase.ejecutarprocedimiento();
         r = GestionarBase.obtenerprocedmiento();
         boolean resultado = false;
         try {
-            resultado = r.getString("cedula").equals(e.getCedula());
+            resultado = r.next();
         } catch (SQLException ex) {
             Logger.getLogger(EstudianteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return resultado;
     }
 
-    /*public Estudiante consultarEstudiante(String cedula) {
-        Estudiante e = new Estudiante();
-        conexion.obtener();
+    public static Estudiante consultarEstudiante(String cedula) {
+        Estudiante e = new Estudiante(cedula, null, null);
+        ResultSet r;
+        GestionarBase.llamarprocedimiento("{call consultarEstudiante(?)}");
+        GestionarBase.asignarparametrosString(1, cedula);
+        GestionarBase.ejecutarprocedimiento();
+        r = GestionarBase.obtenerprocedmiento();
         try {
-            PreparedStatement consulta = conexion.getCnx().prepareStatement(" Select * FROM Estudiante, Rol WHERE "
-                    + "Estudiante.cedula = " + cedula + "AND Rol.idEstudiante = " + cedula + "')'");
-            ResultSet resultados = consulta.executeQuery();
-            conexion.cerrar();
-            switch (resultados.getString("Rol.nombre")) {
-                case "Administrador":
-                    e = new Administrador();
-                    break;
-                case "Vendedor":
-                    e = new Vendedor();
-                    break;
-                case "Comprador":
-                    e = new Comprador();
-                    break;
+            while (r.next()) {
+                if (r.getString("Rol.nombre").equals("Admministrador")) {
+                    e = new Administrador(r.getString("Estudiante.cedula"),
+                            r.getString("Estudiante.nombre"), r.getString("Estudiante.apellido"));
+                } else if (r.getString("Rol.nombre").equals("Vendedor")) {
+                    e = new Vendedor(r.getString("Estudiante.cedula"),
+                            r.getString("Estudiante.nombre"), r.getString("Estudiante.apellido"));
+                } else if (r.getString("Rol.nombre").equals("Comprador")) {
+                    e = new Comprador(r.getString("Estudiante.cedula"),
+                            r.getString("Estudiante.nombre"), r.getString("Estudiante.apellido"));
+                }
+                e.setMatricula(r.getString("Estudiante.matricula"));
+                e.setNombreU(r.getString("Estudiante.usuario"));
+                e.setTelefono(r.getString("Estudiante.telefono"));
+                e.setDireccion(r.getString("Estudiante.direccion"));
+                e.setEmail(r.getString("Estudiante.correo"));
+                e.setWhatsapp(r.getBoolean("Estudiante.whatsapp"));
+                e.setEliminadoE(r.getBoolean("Estudiante.eliminadoE"));
             }
-            e.setCedula(resultados.getString("estudiante.cedula"));
-            e.setMatricula(resultados.getString("estudiante.matricula"));
-            e.setNombre(resultados.getString("estudiante.nombre"));
-            e.setApellido(resultados.getString("estudiante.apellido"));
-            e.setNombreU(resultados.getString("estudiante.usuario"));
-            e.setTelefono(resultados.getString("estudiante.telefono"));
-            e.setDireccion(resultados.getString("estudiante.direccion"));
-            e.setEmail(resultados.getString("estudiante.correo"));
-            e.setWhatsapp(resultados.getBoolean("estudiante.whatsapp"));
         } catch (SQLException ex) {
-            alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setTitle("Error");
-            alerta.setHeaderText("Error de Conección");
-            alerta.setContentText("Revise el estado del servidor");
-            alerta.showAndWait();
+            Logger.getLogger(EstudianteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        conexion.cerrar();
+        GestionarBase.cerrar();
         return e;
-    }*/
+    }
+    
+    public static void eliminarEstudiante(String cedula) {
+        GestionarBase.llamarprocedimiento("{call eliminarEstudiante(?)}");
+        GestionarBase.asignarparametrosString(1, cedula);
+        GestionarBase.ejecutarprocedimiento();
+    }
 }

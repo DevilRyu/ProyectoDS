@@ -23,7 +23,7 @@ public class VendedorDAO {
 
 		ArrayList <Vendedor> arreglo  = new ArrayList<Vendedor>();
 		ResultSet r;
-		GestionarBase.crearprocedimiento("{call obtener_vendedores()}");
+		GestionarBase.llamarprocedimiento("{call obtener_vendedores()}");
 		GestionarBase.ejecutarprocedimiento();
 		r = GestionarBase.obtenerprocedmiento();
 		try {

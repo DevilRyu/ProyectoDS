@@ -10,7 +10,7 @@ package Modelos;
  * @author Diego
  */
 public class Estudiante {
-    
+
     private String cedula;
     private String matricula;
     private String nombre;
@@ -23,17 +23,14 @@ public class Estudiante {
     private String email;
     private String direccion;
     private double saldo;
-    
 
-
-    
     public Estudiante(String cedula, String nombre, String apellido) {
-		this.cedula = cedula;
-		this.nombre = nombre;
-		this.apellido = apellido;
-	}
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
 
-	public String getCedula() {
+    public String getCedula() {
         return cedula;
     }
 
