@@ -42,3 +42,8 @@ Mysql-connector-java-8.0.14 : Para establecer conexion entre la aplicacion y la 
 ```
 NOTA: Solo ingresando con alguno de los nombres de usuario ya mencionados se podrá iniciar una sesión.
 ```
+4 - Consulta de Usuarios
+-----------------
+````````````````
+Para consultar información sobre un usuario el administrador deberá acceder a la opción de administrar usuarios, en esta ventana hay dos tipos de consulta, la primera consiste en buscar un usuario específico ingresando en el apartado de cédula el número de cédula del usario que se desea y presionando la tecla enter, la segunda consiste en consultar todos los usuarios que pertenecen a un rol especifico seleccionando un rol en el comboBox que posee el rol en la parte inferior izquierda
+````````````````
