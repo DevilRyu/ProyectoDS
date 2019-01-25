@@ -12,6 +12,7 @@ import Modelos.Estudiante;
 import Modelos.Vendedor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -114,6 +115,7 @@ public class EstudianteDAO {
         } catch (SQLException ex) {
             Logger.getLogger(EstudianteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        GestionarBase.cerrar();
         return resultado;
     }
 
@@ -155,5 +157,29 @@ public class EstudianteDAO {
         GestionarBase.llamarprocedimiento("{call eliminarEstudiante(?)}");
         GestionarBase.asignarparametrosString(1, cedula);
         GestionarBase.ejecutarprocedimiento();
+        GestionarBase.cerrar();
+    }
+    
+    public static ArrayList<Estudiante> obtenerPorRol(String rol){
+        ArrayList<Estudiante>arreglo = new ArrayList<Estudiante>();
+        ResultSet r;
+        GestionarBase.llamarprocedimiento("{call obtenerPorRol(?)}");
+        GestionarBase.asignarparametrosString(1, rol);
+        GestionarBase.ejecutarprocedimiento();
+        r = GestionarBase.obtenerprocedmiento();
+         try {
+            while (r.next()) {
+                Estudiante e ;
+                e = new Estudiante(r.getString("Estudiante.cedula"),
+                        r.getString("Estudiante.nombre"),r.getString("Estudiante.apellido"));
+                arreglo.add(e);
+            }
+
+            r.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        GestionarBase.cerrar();
+        return arreglo;
     }
 }

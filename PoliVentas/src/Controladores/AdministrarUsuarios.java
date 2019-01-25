@@ -11,7 +11,10 @@ import Modelos.Comprador;
 import Modelos.Estudiante;
 import Modelos.Vendedor;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -20,7 +23,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -64,6 +70,20 @@ public class AdministrarUsuarios implements Initializable {
     private Button Actualizar;
 
     Alert alerta;
+    @FXML
+    private ComboBox<String> rol;
+    @FXML
+    private TableView<Estudiante> tabla;
+    @FXML
+    private TableColumn<Estudiante, String> columnaNombre;
+    @FXML
+    private TableColumn<Estudiante, String> columnaApellido;
+    @FXML
+    private TableColumn<Estudiante, String> columnaCedula;
+    private ArrayList<Estudiante> estudiantes = new ArrayList<Estudiante>();
+    private ObservableList<Estudiante> lista = FXCollections.observableArrayList();
+    @FXML
+    private Button consultar;
 
     /**
      * Initializes the controller class.
@@ -73,7 +93,21 @@ public class AdministrarUsuarios implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        perfil.getItems().addAll("Administrador", "Vendedor", "Comprador");
+        rol.getItems().addAll("Vendedor", "Comprador","Administrador");
+    }
+
+    private void mostrarEstudiantesPorRol() {
+        estudiantes = EstudianteDAO.obtenerPorRol(rol.getValue());
+        actualizarLista();
+        tabla.setItems(lista);
+    }
+
+    private void actualizarLista() {
+        lista.clear();
+        lista.addAll(estudiantes);
+        columnaCedula.setCellValueFactory(new PropertyValueFactory<Estudiante, String>("cedula"));
+        columnaNombre.setCellValueFactory(new PropertyValueFactory<Estudiante, String>("nombre"));
+        columnaApellido.setCellValueFactory(new PropertyValueFactory<Estudiante, String>("apellido"));
     }
 
     @FXML
@@ -206,4 +240,8 @@ public class AdministrarUsuarios implements Initializable {
         this.ws_si.setSelected(false);
     }
 
+    @FXML
+    private void consultarEstudiante(MouseEvent event) {
+        mostrarEstudiantesPorRol();
+    }
 }
