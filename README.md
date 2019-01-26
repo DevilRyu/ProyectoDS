@@ -1,5 +1,6 @@
 PROYECTO DISEÑO DE SOFTWARE - POLIVENTAS
 ======================
+Escuela Superior Politécnica del Litoral Version 1.0 22/01/2019
 
 1 - Descripción
 ---------------
