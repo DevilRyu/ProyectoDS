@@ -45,8 +45,8 @@ NOTA: Solo ingresando con alguno de los nombres de usuario ya mencionados se pod
 4 - Consulta de Usuarios
 -----------------
 ````````````````
-a) Para consultar información sobre un usuario el administrador deberá acceder a la opción  de administrar usuarios, en esta ventana hay dos tipos de consulta, la primera consiste en buscar un usuario específico ingresando en el apartado de cédula el número de cédula del usuario que se desea y presionando la tecla enter.
+Para consultar información sobre un usuario el administrador deberá acceder a la opción  de administrar usuarios, en esta ventana hay dos tipos de consulta, la primera consiste en buscar un usuario específico ingresando en el apartado de cédula el número de cédula del usuario que se desea y presionando la tecla enter.
 
-b) La segunda consiste en consultar todos los usuarios que pertenecen a un rol especifico seleccionando un rol en el comboBox
+La segunda consiste en consultar todos los usuarios que pertenecen a un rol especifico seleccionando un rol en el comboBox
 que posee el rol en la parte inferior izquierda
 ````````````````
