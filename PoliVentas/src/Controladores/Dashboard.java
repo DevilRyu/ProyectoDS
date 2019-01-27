@@ -40,6 +40,7 @@ public class Dashboard {
 
     public void initialize() {
         mostrarArticulosMasBsucados();
+        
     }
 
     private void mostrarArticulosMasBsucados() {

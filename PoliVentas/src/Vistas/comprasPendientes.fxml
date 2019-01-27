@@ -8,20 +8,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="compras_pendientes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="704.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="compras_pendientes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="704.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="223.0" layoutY="38.0" prefHeight="42.0" prefWidth="256.0" text="COMPRAS PENDIENTES">
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>
       </Label>
-      <TableView layoutX="117.0" layoutY="119.0" prefHeight="180.0" prefWidth="448.0">
+      <TableView fx:id="tablaArticulosMasBuscados" layoutX="117.0" layoutY="119.0" prefHeight="180.0" prefWidth="448.0">
          <columns>
-            <TableColumn prefWidth="29.0" text="#" />
-            <TableColumn prefWidth="99.0" text="Producto" />
-            <TableColumn minWidth="0.0" prefWidth="70.0" text="Precio" />
-            <TableColumn prefWidth="91.0" text="Vendedor">
+            <TableColumn fx:id="columnaProducto" prefWidth="29.0" text="#" />
+            <TableColumn fx:id="columnaPrecio" prefWidth="99.0" text="Producto" />
+            <TableColumn fx:id="columnaCalificionP" minWidth="0.0" prefWidth="70.0" text="Precio" />
+            <TableColumn fx:id="columnaCalificacionV" prefWidth="91.0" text="Vendedor">
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                      <image>

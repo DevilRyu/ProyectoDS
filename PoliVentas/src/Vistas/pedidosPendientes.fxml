@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="pedidos_pendientes" fx:id="ventana_pedidos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="pedidos_pendientes" fx:id="ventana_pedidos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ControladorComprasPendientes">
    <children>
       <Spinner layoutX="220.0" layoutY="104.0" prefHeight="10.0" prefWidth="54.0" />
       <Label layoutX="146.0" layoutY="102.0" prefHeight="25.0" prefWidth="78.0" text=" Vendedor">
@@ -58,13 +58,13 @@
             <InnerShadow color="#1050e4" />
          </effect>
       </Button>
-      <TableView layoutX="67.0" layoutY="152.0" prefHeight="178.0" prefWidth="528.0">
+      <TableView fx:id="tablaArticulosMasBuscados" layoutX="67.0" layoutY="152.0" prefHeight="178.0" prefWidth="528.0">
          <columns>
             <TableColumn prefWidth="29.0" text="#" />
-            <TableColumn prefWidth="85.0" text="Producto" />
+            <TableColumn fx:id="columnaProducto" prefWidth="85.0" text="ProductoP" />
             <TableColumn prefWidth="93.0" text="A tiempo" />
-            <TableColumn minWidth="0.0" prefWidth="49.0" text="Precio" />
-            <TableColumn prefWidth="90.0" text="Vendedor">
+            <TableColumn fx:id="columnaPrecio" minWidth="0.0" prefWidth="49.0" text="Precio" />
+            <TableColumn fx:id="columnaCalificacionV" prefWidth="90.0" text="Calif Vendedor">
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -73,7 +73,7 @@
                   </ImageView>
                </graphic>
             </TableColumn>
-            <TableColumn prefWidth="92.0" text="Producto">
+            <TableColumn fx:id="columnaCalificionP" prefWidth="92.0" text="Producto">
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                      <image>

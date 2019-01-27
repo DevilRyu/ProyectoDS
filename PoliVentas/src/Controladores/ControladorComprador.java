@@ -39,7 +39,6 @@ public class ControladorComprador {
 		AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/pedidosPendientes.fxml"));
 		this.ventanaDinamica.getChildren().setAll(pane);
 		
-		
 	}
 	
 	
