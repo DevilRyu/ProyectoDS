@@ -9,13 +9,13 @@ package Modelos;
  *
  * @author Gabriel
  */
-public class compraPendiente {
+public class Compra {
     private String nombreProducto;
     private float precio;
     private Integer calificacionV;
     private Integer calificacionP;
     
-    public compraPendiente(String nombre,float precio,Integer caliV,Integer caliP){
+    public Compra(String nombre,float precio,Integer caliV,Integer caliP){
         this.nombreProducto=nombre;
         this.precio=precio;
         this.calificacionP=caliP;

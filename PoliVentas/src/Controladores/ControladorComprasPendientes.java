@@ -5,48 +5,54 @@
  */
 package Controladores;
 
-
 import DAO.ProductoDAO;
 import Modelos.Producto;
-import Modelos.compraPendiente;
+import Modelos.Compra;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.fxml.Initializable;
+
 /**
  * FXML Controller class
  *
  * @author Diego
  */
 public class ControladorComprasPendientes implements Initializable {
-    @FXML private AnchorPane comprasPendientes;
-    @FXML private TableView<compraPendiente> tablaComprasPendientes;
-    @FXML private TableColumn<Producto, String> columnaProducto;
-    @FXML private TableColumn<Producto, Double> columnaPrecio;
-    @FXML private TableColumn<Producto, Integer> columnaCalificionP;
-    @FXML private TableColumn<Producto, Integer> columnaCalificacionV;
-   
 
-   private ArrayList<compraPendiente> articulos = new ArrayList<compraPendiente>();
-    private ObservableList<compraPendiente> lista = FXCollections.observableArrayList();
-    
+    @FXML
+    private TableColumn<Producto, String> columnaProducto;
+    @FXML
+    private TableColumn<Producto, Double> columnaPrecio;
+    @FXML
+    private TableColumn<Producto, Integer> columnaCalificionP;
+    @FXML
+    private TableColumn<Producto, Integer> columnaCalificacionV;
+    private ArrayList<Compra> articulos = new ArrayList<Compra>();
+    private ObservableList<Compra> lista = FXCollections.observableArrayList();
+    @FXML
+    private TableView<Compra> tablaComprasPendientes;
+    @FXML
+    private AnchorPane compras_pendientes;
+
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("se inicializó");
         mostrarComprasPendientes();
-    } 
+    }
+
     public void mostrarComprasPendientes() {
         articulos = ProductoDAO.comprasPendientes();
         actualizarLista();
@@ -56,10 +62,10 @@ public class ControladorComprasPendientes implements Initializable {
     private void actualizarLista() {
         lista.clear();
         lista.addAll(articulos);
-        columnaProducto.setCellValueFactory(new PropertyValueFactory<Producto,String>("producto"));
-        columnaPrecio.setCellValueFactory(new PropertyValueFactory<Producto,Double>("precio"));
-        columnaCalificacionV.setCellValueFactory(new PropertyValueFactory<Producto,Integer>("calificacionV"));
-        columnaCalificionP.setCellValueFactory(new PropertyValueFactory<Producto,Integer>("calificacionP"));
+        columnaProducto.setCellValueFactory(new PropertyValueFactory<Producto, String>("nombreProducto"));
+        columnaPrecio.setCellValueFactory(new PropertyValueFactory<Producto, Double>("precio"));
+        columnaCalificacionV.setCellValueFactory(new PropertyValueFactory<Producto, Integer>("calificacionV"));
+        columnaCalificionP.setCellValueFactory(new PropertyValueFactory<Producto, Integer>("calificacionP"));
     }
-    
+
 }

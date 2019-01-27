@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 import DataBase.GestionarBase;
 import Modelos.Producto;
-import Modelos.compraPendiente;
+import Modelos.Compra;
 
 /**
  *
@@ -134,33 +134,26 @@ public class ProductoDAO {
         return articulos;
     }
     
-    public static ArrayList<compraPendiente> comprasPendientes() {
-	ArrayList<compraPendiente> comprasP  = new ArrayList();
+    public static ArrayList<Compra> comprasPendientes() {
+	ArrayList<Compra> comprasP  = new ArrayList();
         ResultSet r;
         GestionarBase.llamarprocedimiento("{call consultarPendientes()}");
         GestionarBase.ejecutarprocedimiento();
         r = GestionarBase.obtenerprocedmiento();
-        
         try {
             while (r.next()) {
-                
                 String nombreProducto=r.getString("nombre");
                 float precioProducto=r.getFloat("precio");
                 int calificacionV=r.getInt("calificacionPV");
-                int calificacionP=r.getInt("calificacionP");
-                
-                compraPendiente compra=new compraPendiente(nombreProducto,precioProducto,calificacionV,calificacionP);
-                
+                int calificacionP=r.getInt("calificacionPP");
+                Compra compra=new Compra(nombreProducto,precioProducto,calificacionV,calificacionP);
                 comprasP.add(compra);
-                
             }
-
             r.close();
         } catch (SQLException ex) {
             Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
         }
         GestionarBase.cerrar();
-        
         return comprasP;
     }
 }
