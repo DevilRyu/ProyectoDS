@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="busqueda_sencilla" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="busqueda_sencilla" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.BusquedaSencillaController">
    <children>
       <Label layoutX="213.0" layoutY="20.0" prefHeight="30.0" prefWidth="231.0" text="BUSQUEDA SENCILLA" textAlignment="CENTER">
          <font>
@@ -22,23 +22,23 @@
             <Font name="Britannic Bold" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="262.0" layoutY="77.0" />
-      <Button layoutX="418.0" layoutY="75.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="22.0">
+      <TextField fx:id="cuadro" layoutX="262.0" layoutY="77.0" />
+      <Button layoutX="418.0" layoutY="75.0" mnemonicParsing="false" onAction="#busquedaSencilla" prefHeight="25.0" prefWidth="22.0">
          <graphic>
-            <ImageView fitHeight="25.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="search" fitHeight="25.0" fitWidth="22.0" onMouseClicked="#busquedaSencilla" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/buscar.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <TableView layoutX="107.0" layoutY="130.0" prefHeight="289.0" prefWidth="439.0">
+      <TableView fx:id="tablBusquedaSencilla" layoutX="107.0" layoutY="130.0" prefHeight="289.0" prefWidth="439.0">
          <columns>
-            <TableColumn prefWidth="101.0" text="Producto" />
-            <TableColumn prefWidth="93.0" text="Vendedor" />
-            <TableColumn prefWidth="81.0" text="Costo" />
-            <TableColumn prefWidth="82.0" text="Disponible" />
-            <TableColumn prefWidth="82.0" text="Estrellas" />
+            <TableColumn fx:id="columnaProducto" prefWidth="101.0" text="Producto" />
+            <TableColumn fx:id="columnaVendedor" prefWidth="93.0" text="Vendedor" />
+            <TableColumn fx:id="columnaCosto" prefWidth="81.0" text="Costo" />
+            <TableColumn fx:id="columnaDisponible" prefWidth="82.0" text="Disponible" />
+            <TableColumn fx:id="columnaEstrella" prefWidth="82.0" text="Estrellas" />
          </columns>
       </TableView>
    </children>

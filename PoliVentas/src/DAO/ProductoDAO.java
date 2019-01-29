@@ -134,6 +134,31 @@ public class ProductoDAO {
         return articulos;
     }
     
+    public static ArrayList<Producto> busquedaSencilla(String coincidencia) {
+        ArrayList<Producto> articulos  = new ArrayList();
+        ResultSet r;
+        GestionarBase.llamarprocedimiento("{call busquedaSencilla(?)}");
+
+        GestionarBase.asignarparametrosString(1, coincidencia);
+
+        GestionarBase.ejecutarprocedimiento();
+        r = GestionarBase.obtenerprocedmiento();
+
+        try {
+            while (r.next()) {
+                Producto articulo = new Producto(r.getString("nombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
+                        r.getString("idAdmin"), r.getString("idVendedor"), r.getInt("cantidad"));
+                articulos.add(articulo);
+            }
+
+            r.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        GestionarBase.cerrar();
+        return articulos;
+    }
+    
     public static ArrayList<Compra> comprasPendientes() {
 	ArrayList<Compra> comprasP  = new ArrayList();
         ResultSet r;
