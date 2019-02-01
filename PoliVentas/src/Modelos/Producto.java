@@ -26,7 +26,7 @@ public class Producto {
 	private float precio;
 	private boolean eliminadoP;
 	private String idAdmin;
-	private String idVendedor;
+	private Vendedor vendedor;
 	private int cantidad;
 
 	public Producto(String nombre, String descripcion, String categoria, int idProducto, float precio, int cantidad) {
@@ -42,7 +42,7 @@ public class Producto {
 	
 	
 	public Producto(String nombre, String descripcion, String categoria, int idProducto, float precio, String idAdmin,
-			String idVendedor, int cantidad) {
+			Vendedor vendedor, int cantidad) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -50,7 +50,7 @@ public class Producto {
 		this.idProducto = idProducto;
 		this.precio = precio;
 		this.idAdmin = idAdmin;
-		this.idVendedor = idVendedor;
+		this.vendedor = vendedor;
 		this.cantidad = cantidad;
 	}
 
@@ -130,12 +130,12 @@ public class Producto {
 		this.idAdmin = idAdmin;
 	}
 
-	public String getIdVendedor() {
-		return idVendedor;
+	public Vendedor getVendedor() {
+		return vendedor;
 	}
 
-	public void setIdVendedor(String idVendedor) {
-		this.idVendedor = idVendedor;
+	public void setIdVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
 	}
 
 	public int getCantidad() {

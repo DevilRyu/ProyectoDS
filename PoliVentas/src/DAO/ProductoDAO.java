@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import DataBase.GestionarBase;
 import Modelos.Producto;
 import Modelos.Compra;
+import Modelos.Vendedor;
 
 /**
  *
@@ -40,8 +41,8 @@ public class ProductoDAO {
         try {
             while (r.next()) {
                 Producto d;
-                d = new Producto(r.getString("nombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
-                        r.getString("idAdmin"), r.getString("idVendedor"), r.getInt("cantidad"));
+                d = new Producto(r.getString("pNombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
+                        r.getString("idAdmin"), new Vendedor(r.getString("idVendedor"),"",""), r.getInt("cantidad"));
 
                 arreglo.add(d);
 
@@ -65,8 +66,8 @@ public class ProductoDAO {
         r = GestionarBase.obtenerprocedmiento();
         try {
             while (r.next()) {
-                Producto d = new Producto(r.getString("nombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
-                        r.getString("idAdmin"), r.getString("idVendedor"), r.getInt("cantidad"));
+                Producto d = new Producto(r.getString("pNombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
+                        r.getString("idAdmin"), new Vendedor(r.getString("idVendedor"),"",""), r.getInt("cantidad"));
                 arreglo.add(d);
             }
 
@@ -91,7 +92,7 @@ public class ProductoDAO {
 
                 Producto d;
                 d = new Producto(r.getString("nombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
-                        r.getString("idAdmin"), r.getString("idVendedor"), r.getInt("cantidad"));
+                        r.getString("idAdmin"), new Vendedor(r.getString("idVendedor"),"",""), r.getInt("cantidad"));
 
                 arreglo.add(d);
             }
@@ -121,8 +122,8 @@ public class ProductoDAO {
         r = GestionarBase.obtenerprocedmiento();
         try {
             while (r.next()) {
-                Producto articulo = new Producto(r.getString("nombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
-                        r.getString("idAdmin"), r.getString("idVendedor"), r.getInt("cantidad"));
+                Producto articulo = new Producto(r.getString("pNombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
+                        r.getString("idAdmin"), new Vendedor(r.getString("idVendedor"),"",""), r.getInt("cantidad"));
                 articulos.add(articulo);
             }
 
@@ -143,11 +144,13 @@ public class ProductoDAO {
 
         GestionarBase.ejecutarprocedimiento();
         r = GestionarBase.obtenerprocedmiento();
-
+        System.out.println(" query consultado");
         try {
             while (r.next()) {
-                Producto articulo = new Producto(r.getString("nombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
-                        r.getString("idAdmin"), r.getString("idVendedor"), r.getInt("cantidad"));
+                /*Producto articulo = new Producto(r.getString("nombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
+                        r.getString("idAdmin"),new Vendedor(r.getString("idVendedor"),"Andres","Ipa"), r.getInt("cantidad"));*/
+                Producto articulo = new Producto(r.getString("pNombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
+                        r.getString("idAdmin"),new Vendedor(r.getString("idVendedor"),r.getString("nombre"),r.getString("apellido")), r.getInt("cantidad"));
                 articulos.add(articulo);
             }
 
@@ -167,7 +170,7 @@ public class ProductoDAO {
         r = GestionarBase.obtenerprocedmiento();
         try {
             while (r.next()) {
-                String nombreProducto=r.getString("nombre");
+                String nombreProducto=r.getString("pNombre");
                 float precioProducto=r.getFloat("precio");
                 int calificacionV=r.getInt("calificacionPV");
                 int calificacionP=r.getInt("calificacionPP");

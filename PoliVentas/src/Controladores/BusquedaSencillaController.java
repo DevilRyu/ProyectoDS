@@ -7,6 +7,7 @@ package Controladores;
 
 import DAO.ProductoDAO;
 import Modelos.Producto;
+import Modelos.Vendedor;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -39,7 +40,7 @@ public class BusquedaSencillaController implements Initializable {
     @FXML
     private TableColumn<Producto, String> columnaProducto;
     @FXML
-    private TableColumn<Producto, String> columnaVendedor;
+    private TableColumn<Producto, Vendedor> columnaVendedor;
     @FXML
     private TableColumn<Producto, Double> columnaCosto;
     @FXML
@@ -57,11 +58,11 @@ public class BusquedaSencillaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         mostrarArticulosBusqueda();
+        
     }    
     
     private void mostrarArticulosBusqueda() {
         if(!cuadro.getText().isEmpty()){
-            System.out.println(cuadro.getText());
             articulos = ProductoDAO.busquedaSencilla(cuadro.getText());
             actualizarLista();
             tablBusquedaSencilla.setItems(lista);
@@ -71,14 +72,14 @@ public class BusquedaSencillaController implements Initializable {
 
     @FXML
     private void busquedaSencilla(ActionEvent event) {
-        mostrarArticulosBusqueda();
+        mostrarArticulosBusqueda();        
     }
 
     private void actualizarLista() {
         lista.clear();
         lista.addAll(articulos);
         columnaProducto.setCellValueFactory(new PropertyValueFactory<Producto,String>("nombre"));
-        columnaVendedor.setCellValueFactory(new PropertyValueFactory<Producto,String>("vendedor"));
+        columnaVendedor.setCellValueFactory(new PropertyValueFactory<Producto,Vendedor>("vendedor"));
         columnaCosto.setCellValueFactory(new PropertyValueFactory<Producto,Double>("precio"));
         columnaDisponible.setCellValueFactory(new PropertyValueFactory<Producto,Integer>("cantidad"));
         columnaEstrella.setCellValueFactory(new PropertyValueFactory<Producto,Integer>("calificacionPP"));
