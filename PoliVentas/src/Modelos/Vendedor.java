@@ -5,6 +5,8 @@
  */
 package Modelos;
 
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author Diego
@@ -28,7 +30,15 @@ public class Vendedor extends Estudiante{
 
     public void setCalificacionPV(double calificacionPV) {
         this.calificacionPV = calificacionPV;
+    } 
+   
+
+    @Override
+    public String toString() {
+        return super.getNombre() + " " + super.getApellido();
     }
+    
+    
     
     
 }

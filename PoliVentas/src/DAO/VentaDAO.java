@@ -7,6 +7,7 @@ package DAO;
 
 import DataBase.GestionarBase;
 import Modelos.Producto;
+import Modelos.Venta;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,26 +18,24 @@ import java.util.logging.Logger;
  *
  * @author Public
  */
-public class CompraDAO {
-    /*
-}
-    public static ArrayList<Producto> comprasPendientes() {
-        
-        /*
-
-        ArrayList<Producto> arreglo = new ArrayList<Producto>();
+public class VentaDAO {
+    public static ArrayList<Venta> ventasPendientes(String cedula) {
+        ArrayList<Venta> articulos = new ArrayList();
         ResultSet r;
-        GestionarBase.llamarprocedimiento("{call obtener_productos()}");
+        GestionarBase.llamarprocedimiento("{call ventasPendientes(?)}");
+
+        GestionarBase.asignarparametrosString(1, cedula);
+
         GestionarBase.ejecutarprocedimiento();
         r = GestionarBase.obtenerprocedmiento();
+        System.out.println(" query consultado");
         try {
             while (r.next()) {
-                Producto d;
-                d = new Producto(r.getString("nombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
-                        r.getString("idAdmin"), r.getString("idVendedor"), r.getInt("cantidad"));
-
-                arreglo.add(d);
-
+                
+                Venta articulo = new Venta(r.getString("pNombre"), 
+                        r.getString("nombre"), r.getDouble("precio"), 
+                        r.getString("lugar"));
+                articulos.add(articulo);
             }
 
             r.close();
@@ -44,7 +43,6 @@ public class CompraDAO {
             Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
         }
         GestionarBase.cerrar();
-        return arreglo;
-
-    }*/
+        return articulos;
+    }
 }
