@@ -9,7 +9,7 @@ package Modelos;
  *
  * @author Diego
  */
-public class Estudiante {
+public class Estudiante implements InterfaceEstudiante {
 
     private String cedula;
     private String matricula;
@@ -29,6 +29,9 @@ public class Estudiante {
         this.nombre = nombre;
         this.apellido = apellido;
     }
+    
+    @Override
+    public void registrarEstudiante(){};
 
     public String getCedula() {
         return cedula;
@@ -125,4 +128,7 @@ public class Estudiante {
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
+
+    @Override
+    public void actualizarEstudiante() {}
 }
