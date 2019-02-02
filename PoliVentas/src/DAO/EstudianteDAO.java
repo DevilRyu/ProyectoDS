@@ -13,6 +13,7 @@ import Modelos.Vendedor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -103,6 +104,34 @@ public class EstudianteDAO {
         GestionarBase.cerrar();
     }
 
+    public static LinkedList validarLogin(String user){
+        ResultSet r;
+        GestionarBase.llamarprocedimiento("{call verificarLogin(?)}");
+        GestionarBase.asignarparametrosString(1, user);
+        System.out.println("asignarParametro");
+        GestionarBase.ejecutarprocedimiento();
+        System.out.println("ejecutarProcedimiento");
+        r = GestionarBase.obtenerprocedmiento();
+        
+        LinkedList<String> datos=new LinkedList<String>();
+        
+        boolean resultado = false;
+        
+        try {
+            resultado = r.next();
+            if(resultado){
+                datos.add(r.getString("Estudiante.contrasenia"));
+                datos.add(r.getString("Rol.nombre"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EstudianteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        GestionarBase.cerrar();
+        return datos;
+    }
+    
     public static boolean verificarEstudiante(Estudiante e) {
         ResultSet r;
         GestionarBase.llamarprocedimiento("{call verificarEstudiante(?)}");

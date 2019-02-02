@@ -8,18 +8,18 @@ import javafx.stage.Stage;
 
 public class PoliVentas extends Application {
 
-	@Override
-	public void start(Stage stage) throws Exception {
-		stage.setTitle("POLIVENTAS");
+    @Override
+    public void start(Stage stage) throws Exception {
+        stage.setTitle("POLIVENTAS");
         Parent root = FXMLLoader.load(getClass().getResource("/Vistas/dashboard.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-		
-	}
-	
-	 public static void main(String[] args) {
-	        launch(args);
-	    }
-         
+
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
 }

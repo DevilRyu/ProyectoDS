@@ -30,7 +30,8 @@ public class ProductoDAO {
         GestionarBase.ejecutarprocedimiento();
         GestionarBase.cerrar();
     }
-
+    
+    
     public static ArrayList<Producto> obtener_productos() {
 
         ArrayList<Producto> arreglo = new ArrayList<Producto>();
