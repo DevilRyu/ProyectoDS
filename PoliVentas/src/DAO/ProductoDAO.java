@@ -166,7 +166,8 @@ public class ProductoDAO {
     public static ArrayList<Compra> comprasPendientes() {
 	ArrayList<Compra> comprasP  = new ArrayList();
         ResultSet r;
-        GestionarBase.llamarprocedimiento("{call consultarPendientes()}");
+        GestionarBase.llamarprocedimiento("{call consultarCompraPendiente(?)}");
+        GestionarBase.asignarparametrosString(1, "1312561952");
         GestionarBase.ejecutarprocedimiento();
         r = GestionarBase.obtenerprocedmiento();
         try {

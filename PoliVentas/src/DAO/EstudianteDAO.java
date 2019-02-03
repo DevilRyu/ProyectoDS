@@ -62,9 +62,7 @@ public class EstudianteDAO {
         ResultSet r;
         GestionarBase.llamarprocedimiento("{call verificarLogin(?)}");
         GestionarBase.asignarparametrosString(1, user);
-        System.out.println("asignarParametro");
         GestionarBase.ejecutarprocedimiento();
-        System.out.println("ejecutarProcedimiento");
         r = GestionarBase.obtenerprocedmiento();
         LinkedList<String> datos=new LinkedList<String>();
         boolean resultado = false;
