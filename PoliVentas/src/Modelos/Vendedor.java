@@ -49,4 +49,6 @@ public class Vendedor extends Estudiante {
     public String toString() {
         return super.getNombre() + " " + super.getApellido();
     }
+    
+    
 }

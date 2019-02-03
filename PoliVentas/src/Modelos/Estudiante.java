@@ -5,6 +5,8 @@
  */
 package Modelos;
 
+import java.util.Objects;
+
 /**
  *
  * @author Diego
@@ -131,4 +133,32 @@ public class Estudiante implements InterfaceEstudiante {
 
     @Override
     public void actualizarEstudiante() {}
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Estudiante other = (Estudiante) obj;
+        
+        if (!Objects.equals(this.cedula, other.cedula)) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    
 }
