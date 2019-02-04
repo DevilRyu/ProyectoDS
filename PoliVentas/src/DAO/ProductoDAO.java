@@ -83,7 +83,7 @@ public class ProductoDAO {
 
     public static ArrayList<Producto> obtener_productosVendedor(String a) {
 
-        ArrayList<Producto> arreglo = new ArrayList<>();
+        ArrayList<Producto> arreglo = new ArrayList<Producto>();
         ResultSet r;
         GestionarBase.llamarprocedimiento("{call obtener_productosVendedor(?)}");
         GestionarBase.asignarparametrosString(1, a);
@@ -125,7 +125,7 @@ public class ProductoDAO {
         try {
             while (r.next()) {
                 Producto articulo = new Producto(r.getString("pNombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
-                        r.getString("idAdmin"), new Vendedor(r.getString("idVendedor"),"",""), r.getInt("cantidad"));
+                        r.getString("idAdmin"), new Vendedor(r.getString("idVendedor"),"Defualt","Default"), r.getInt("cantidad"));
                 articulos.add(articulo);
             }
 

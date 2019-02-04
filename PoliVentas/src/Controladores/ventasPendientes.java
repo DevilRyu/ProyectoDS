@@ -61,10 +61,10 @@ public class ventasPendientes implements Initializable {
     private void actualizarLista() {
         lista.clear();
         lista.addAll(articulos);
-        columnProducto.setCellValueFactory(new PropertyValueFactory<>("producto"));
-        columnComprador.setCellValueFactory(new PropertyValueFactory<>("comprador"));
-        columnPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
-        ColumnLugar.setCellValueFactory(new PropertyValueFactory<>("lugar"));
+        columnProducto.setCellValueFactory(new PropertyValueFactory<Venta,String>("producto"));
+        columnComprador.setCellValueFactory(new PropertyValueFactory<Venta,String>("comprador"));
+        columnPrecio.setCellValueFactory(new PropertyValueFactory<Venta,Double>("precio"));
+        ColumnLugar.setCellValueFactory(new PropertyValueFactory<Venta,String>("lugar"));
     }
     
 }
