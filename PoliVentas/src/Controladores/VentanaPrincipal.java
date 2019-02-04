@@ -1,23 +1,22 @@
 package Controladores;
 
 import DAO.EstudianteDAO;
-import DAO.ProductoDAO;
+import Modelos.Estudiante;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.StageStyle;
 
 public class VentanaPrincipal {
 
-    private LinkedList<String> info;
+    private ArrayList<String> info;
+    public static Estudiante estudianteLogeado;
     
     @FXML
     public TextField usuario;
@@ -30,17 +29,16 @@ public class VentanaPrincipal {
     private void iniciar_sesion(ActionEvent event) throws IOException {
         info = EstudianteDAO.validarLogin(usuario.getText());
         if (info.size() > 0) {
+            estudianteLogeado = EstudianteDAO.consultarEstudiante(info.get(2));
             if (info.get(1).equals("Comprador")) {
                 AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/ventanaComprador.fxml"));
                 this.ventanaPrincipal.getChildren().setAll(pane);
             }
-
-            if (info.get(1).equals("Vendedor")) {
+            else if (info.get(1).equals("Vendedor")) {
                 AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/ventanaVendedor.fxml"));
                 this.ventanaPrincipal.getChildren().setAll(pane);
             }
-
-            if (info.get(1).equals("admin")) {
+            else if (info.get(1).equals("Administrador")) {
                 AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/Vistas/ventanaAdmin.fxml"));
                 this.ventanaPrincipal.getChildren().setAll(pane);
             }
@@ -71,7 +69,4 @@ public class VentanaPrincipal {
     public void initialize() {
 
     }
-    
-    
-
 }

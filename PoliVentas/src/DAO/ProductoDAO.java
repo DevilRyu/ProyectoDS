@@ -1,5 +1,6 @@
 package DAO;
 
+import Controladores.VentanaPrincipal;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -165,7 +166,7 @@ public class ProductoDAO {
 	ArrayList<Compra> comprasP  = new ArrayList();
         ResultSet r;
         GestionarBase.llamarprocedimiento("{call consultarCompraPendiente(?)}");
-        GestionarBase.asignarparametrosString(1, "1312561952");
+        GestionarBase.asignarparametrosString(1, VentanaPrincipal.estudianteLogeado.getCedula());
         GestionarBase.ejecutarprocedimiento();
         r = GestionarBase.obtenerprocedmiento();
         try {
