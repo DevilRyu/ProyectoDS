@@ -6,7 +6,7 @@ Escuela Superior Politécnica del Litoral Version 1.0 22/01/2019
 ---------------
 
 
-2 - Prototipo no funcional
+2 - Ingreso al sistema
 ---------------
 Para observar el flujo correcto del sistema, se debe ingresar con un perfil de usuario distinto.
 
