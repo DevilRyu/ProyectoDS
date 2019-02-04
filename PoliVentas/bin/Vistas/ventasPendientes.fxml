@@ -9,21 +9,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="ventas_pendientes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="ventas_pendientes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ventasPendientes">
    <children>
       <Label layoutX="190.0" layoutY="30.0" prefHeight="42.0" prefWidth="224.0" text="VENTAS PENDIENTES" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>
       </Label>
-      <TableView layoutX="39.0" layoutY="104.0" prefHeight="181.0" prefWidth="515.0">
+      <TableView fx:id="tablaVentasPendientes" layoutX="39.0" layoutY="104.0" prefHeight="181.0" prefWidth="515.0">
          <columns>
             <TableColumn prefWidth="29.0" text="#" />
-            <TableColumn prefWidth="135.0" text="Producto" />
-            <TableColumn prefWidth="177.0" text="Comprador" />
-            <TableColumn prefWidth="92.0" text="Precio" />
-            <TableColumn prefWidth="92.0" text="Lugar" />
+            <TableColumn fx:id="columnProducto" prefWidth="135.0" text="Producto" />
+            <TableColumn fx:id="columnComprador" prefWidth="177.0" text="Comprador" />
+            <TableColumn fx:id="columnPrecio" prefWidth="92.0" text="Precio" />
+            <TableColumn fx:id="ColumnLugar" prefWidth="92.0" text="Lugar" />
          </columns>
       </TableView>
       <CheckBox layoutX="46.0" layoutY="132.0" mnemonicParsing="false" />

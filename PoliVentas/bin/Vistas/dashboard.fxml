@@ -11,25 +11,25 @@
 
 <AnchorPane fx:id="dashboard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="522.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.Dashboard">
    <children>
-      <Label layoutX="97.0" layoutY="54.0" prefHeight="31.0" prefWidth="98.0" text="TOP 15" textAlignment="CENTER">
+      <Label layoutX="147.0" layoutY="54.0" prefHeight="31.0" prefWidth="98.0" text="TOP 15" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>
       </Label>
-      <TableView layoutX="46.0" layoutY="112.0" prefHeight="366.0" prefWidth="226.0">
+      <TableView fx:id="tabla" layoutX="71.0" layoutY="112.0" prefHeight="366.0" prefWidth="249.0">
          <columns>
-            <TableColumn prefWidth="29.0" text="#" />
-            <TableColumn prefWidth="87.0" text="Producto" />
-            <TableColumn prefWidth="85.0" text="Descripcion" />
+            <TableColumn fx:id="columnaProducto" prefWidth="87.0" text="Producto" />
+            <TableColumn fx:id="columnaCategoria" prefWidth="85.0" text="Categoría" />
+            <TableColumn fx:id="columnaPrecio" prefWidth="75.0" text="Precio" />
          </columns>
       </TableView>
-      <Separator layoutX="303.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="522.0" prefWidth="22.0" />
-      <Label layoutX="413.0" layoutY="54.0" prefHeight="31.0" prefWidth="98.0" text="Nuevos" textAlignment="CENTER">
+      <Separator layoutX="340.0" orientation="VERTICAL" prefHeight="522.0" prefWidth="22.0" />
+      <Label layoutX="461.0" layoutY="54.0" prefHeight="31.0" prefWidth="98.0" text="Nuevos" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>
       </Label>
-      <TableView layoutX="341.0" layoutY="112.0" prefHeight="366.0" prefWidth="233.0">
+      <TableView layoutX="378.0" layoutY="112.0" prefHeight="366.0" prefWidth="233.0">
          <columns>
             <TableColumn prefWidth="29.0" text="#" />
             <TableColumn prefWidth="87.0" text="Producto" />

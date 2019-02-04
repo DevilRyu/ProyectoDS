@@ -85,4 +85,18 @@ public class UnitTest extends TestCase {
                 
     }
     
+    public static void testobtenerProductos(){
+        ArrayList<Producto> productos=ProductoDAO.obtener_productos();
+        Assert.assertSame(productos.size(),14);
+                
+    }
+    
+    public static void testverificarProducto(){
+        ArrayList<Producto> productos=ProductoDAO.verificar_producto("Iphone 8");
+        Assert.assertSame(productos.size(),29);
+                
+    }
+    
+    
+    
 }
