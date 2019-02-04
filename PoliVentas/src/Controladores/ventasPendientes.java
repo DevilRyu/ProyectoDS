@@ -44,6 +44,8 @@ public class ventasPendientes implements Initializable {
     
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -51,7 +53,7 @@ public class ventasPendientes implements Initializable {
     }    
     
     public void mostrarVentasPendientes() {
-        articulos = VentaDAO.ventasPendientes("0923454321");
+        articulos = VentaDAO.ventasPendientes(VentanaPrincipal.estudianteLogeado.getCedula());
         actualizarLista();
         tablaVentasPendientes.setItems(lista);
     }
@@ -59,11 +61,10 @@ public class ventasPendientes implements Initializable {
     private void actualizarLista() {
         lista.clear();
         lista.addAll(articulos);
-        columnProducto.setCellValueFactory(new PropertyValueFactory<Venta, String>("producto"));
-        columnComprador.setCellValueFactory(new PropertyValueFactory<Venta, String>("comprador"));
-        columnPrecio.setCellValueFactory(new PropertyValueFactory<Venta, Double>("precio"));
-        ColumnLugar.setCellValueFactory(new PropertyValueFactory<Venta, String>("lugar"));
+        columnProducto.setCellValueFactory(new PropertyValueFactory<Venta,String>("producto"));
+        columnComprador.setCellValueFactory(new PropertyValueFactory<Venta,String>("comprador"));
+        columnPrecio.setCellValueFactory(new PropertyValueFactory<Venta,Double>("precio"));
+        ColumnLugar.setCellValueFactory(new PropertyValueFactory<Venta,String>("lugar"));
     }
-    
     
 }

@@ -19,11 +19,11 @@ import java.util.logging.Logger;
  * @author Public
  */
 public class VentaDAO {
+    
     public static ArrayList<Venta> ventasPendientes(String cedula) {
         ArrayList<Venta> articulos = new ArrayList();
         ResultSet r;
         GestionarBase.llamarprocedimiento("{call ventasPendientes(?)}");
-
         GestionarBase.asignarparametrosString(1, cedula);
 
         GestionarBase.ejecutarprocedimiento();

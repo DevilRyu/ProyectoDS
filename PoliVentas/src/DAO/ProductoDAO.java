@@ -1,5 +1,6 @@
 package DAO;
 
+import Controladores.VentanaPrincipal;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -82,7 +83,7 @@ public class ProductoDAO {
 
     public static ArrayList<Producto> obtener_productosVendedor(String a) {
 
-        ArrayList<Producto> arreglo = new ArrayList<>();
+        ArrayList<Producto> arreglo = new ArrayList<Producto>();
         ResultSet r;
         GestionarBase.llamarprocedimiento("{call obtener_productosVendedor(?)}");
         GestionarBase.asignarparametrosString(1, a);
@@ -124,7 +125,7 @@ public class ProductoDAO {
         try {
             while (r.next()) {
                 Producto articulo = new Producto(r.getString("pNombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
-                        r.getString("idAdmin"), new Vendedor(r.getString("idVendedor"),"",""), r.getInt("cantidad"));
+                        r.getString("idAdmin"), new Vendedor(r.getString("idVendedor"),"Defualt","Default"), r.getInt("cantidad"));
                 articulos.add(articulo);
             }
 
@@ -165,7 +166,7 @@ public class ProductoDAO {
 	ArrayList<Compra> comprasP  = new ArrayList();
         ResultSet r;
         GestionarBase.llamarprocedimiento("{call consultarCompraPendiente(?)}");
-        GestionarBase.asignarparametrosString(1, "1312561952");
+        GestionarBase.asignarparametrosString(1, VentanaPrincipal.estudianteLogeado.getCedula());
         GestionarBase.ejecutarprocedimiento();
         r = GestionarBase.obtenerprocedmiento();
         try {

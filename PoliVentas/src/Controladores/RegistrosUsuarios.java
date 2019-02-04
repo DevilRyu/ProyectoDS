@@ -6,7 +6,6 @@
 package Controladores;
 
 import DAO.EstudianteDAO;
-import Modelos.Administrador;
 import Modelos.Comprador;
 import Modelos.Estudiante;
 import Modelos.Vendedor;

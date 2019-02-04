@@ -6,28 +6,28 @@ Escuela Superior Politécnica del Litoral Version 1.0 22/01/2019
 ---------------
 
 
-2 - Prototipo no funcional
+2 - Ingreso al sistema
 ---------------
 Para observar el flujo correcto del sistema, se debe ingresar con un perfil de usuario distinto.
 
 * Iniciar sesion como Comprador:
 ```
-Usuario: comprador
-Password:
+Usuario: MiguelR
+Password: miguel04
 
 ```
 * Iniciar sesion como Vendedor:
 
 ```
-Usuario: vendedor
-Password:
+Usuario: erickV
+Password: erickV01
 ```
 
 * Iniciar sesion como Administrador:
 
 ```
 Usuario: admin
-Password:
+Password: admin
 ```
 3 - Prototipo funcional
 ---------------
