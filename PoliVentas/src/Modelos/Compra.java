@@ -10,6 +10,7 @@ package Modelos;
  * @author Gabriel
  */
 public class Compra {
+    
     private String nombreProducto;
     private float precio;
     private Integer calificacionV;
@@ -53,6 +54,5 @@ public class Compra {
     public void setCalificacionP(Integer calificacionP) {
         this.calificacionP = calificacionP;
     }
-    
-    
+        
 }

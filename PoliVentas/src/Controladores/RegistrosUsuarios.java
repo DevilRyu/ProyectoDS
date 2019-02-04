@@ -84,14 +84,12 @@ public class RegistrosUsuarios implements Initializable {
     }
 
     private Estudiante crearEstudiante() {
-        Estudiante e;
+        Estudiante e = new Estudiante(this.cedula.getText(), null, null);
         if (this.perfil.getValue().equals("Vendedor")) {
             e = new Vendedor(cedula.getText(), nombres.getText(), apellidos.getText());
 
         } else if (this.perfil.getValue().equals("Comprador")) {
             e = new Comprador(cedula.getText(), nombres.getText(), apellidos.getText());
-        } else {
-            e = new Administrador(cedula.getText(), nombres.getText(), apellidos.getText());
         }
         e.setMatricula(this.matricula.getText());
         e.setNombreU(this.usuario.getText());

@@ -5,24 +5,37 @@
  */
 package Modelos;
 
-import javafx.beans.property.StringProperty;
+import DataBase.GestionarBase;
 
 /**
  *
  * @author Diego
  */
-public class Vendedor extends Estudiante{
-    
-	
-    public Vendedor(String cedula, String nombre, String apellido) {
-		super(cedula, nombre, apellido);
-	}
+public class Vendedor extends Estudiante {
 
-	private double calificacionPV;
+    private double calificacionPV;
+
+    public Vendedor(String cedula, String nombre, String apellido) {
+        super(cedula, nombre, apellido);
+    }
+
+    @Override
+    public void registrarEstudiante() {
+        GestionarBase.llamarprocedimiento("{call registrarVendedor(?,?)}");
+        GestionarBase.asignarparametrosString(1, this.getCedula());
+        GestionarBase.asignarparametrosDouble(2, this.getCalificacionPV());
+        GestionarBase.ejecutarprocedimiento();
+        GestionarBase.llamarprocedimiento("{call agregarRol(?,?,?)}");
+        GestionarBase.asignarparametrosString(1, this.getCedula());
+        GestionarBase.asignarparametrosString(2, "1");
+        GestionarBase.asignarparametrosString(3, "Vendedor");
+        GestionarBase.ejecutarprocedimiento();
+    }
     
-    
-   
-    
+    @Override
+    public void actualizarEstudiante(){
+        this.registrarEstudiante();
+    }
 
     public double getCalificacionPV() {
         return calificacionPV;
@@ -30,15 +43,12 @@ public class Vendedor extends Estudiante{
 
     public void setCalificacionPV(double calificacionPV) {
         this.calificacionPV = calificacionPV;
-    } 
-   
+    }
 
     @Override
     public String toString() {
         return super.getNombre() + " " + super.getApellido();
     }
-    
-    
     
     
 }

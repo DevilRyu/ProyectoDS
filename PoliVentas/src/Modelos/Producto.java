@@ -6,6 +6,7 @@
 package Modelos;
 
 import java.sql.Date;
+import java.util.Objects;
 
 /**
  *
@@ -170,4 +171,35 @@ public class Producto {
 		this.precio = precio;
 	}
 
+    @Override
+    public String toString() {
+        return "Producto{" + "codProducto=" + codProducto + ", nombre=" + nombre + ", descripcion=" + descripcion + ", categoria=" + categoria + ", tiempoMax=" + tiempoMax + ", contadorBusqueda=" + contadorBusqueda + ", fechaIngreso=" + fechaIngreso + ", idProducto=" + idProducto + ", calificacionPP=" + calificacionPP + ", precio=" + precio + ", eliminadoP=" + eliminadoP + ", idAdmin=" + idAdmin + ", vendedor=" + vendedor + ", cantidad=" + cantidad + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Producto other = (Producto) obj;
+        if (this.idProducto != other.idProducto) {
+            return false;
+        }
+        return true;
+    }
+
+    
+        
 }

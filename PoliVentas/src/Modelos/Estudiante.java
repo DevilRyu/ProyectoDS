@@ -5,11 +5,13 @@
  */
 package Modelos;
 
+import java.util.Objects;
+
 /**
  *
  * @author Diego
  */
-public class Estudiante {
+public class Estudiante implements InterfaceEstudiante {
 
     private String cedula;
     private String matricula;
@@ -29,6 +31,9 @@ public class Estudiante {
         this.nombre = nombre;
         this.apellido = apellido;
     }
+    
+    @Override
+    public void registrarEstudiante(){};
 
     public String getCedula() {
         return cedula;
@@ -125,4 +130,35 @@ public class Estudiante {
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
+
+    @Override
+    public void actualizarEstudiante() {}
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Estudiante other = (Estudiante) obj;
+        
+        if (!Objects.equals(this.cedula, other.cedula)) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    
 }

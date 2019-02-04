@@ -38,30 +38,7 @@ public class EstudianteDAO {
         GestionarBase.asignarparametrosString(11, e.getDireccion());
         GestionarBase.asignarparametrosDouble(12, e.getSaldo());
         GestionarBase.ejecutarprocedimiento();
-        if (e instanceof Vendedor) {
-            Vendedor v = (Vendedor) e;
-            GestionarBase.llamarprocedimiento("{call registrarVendedor(?,?)}");
-            GestionarBase.asignarparametrosString(1, e.getCedula());
-            GestionarBase.asignarparametrosDouble(2, ((Vendedor) e).getCalificacionPV());
-            GestionarBase.ejecutarprocedimiento();
-            GestionarBase.llamarprocedimiento("{call agregarRol(?,?,?)}");
-            GestionarBase.asignarparametrosString(1, e.getCedula());
-            GestionarBase.asignarparametrosString(2, "1");
-            GestionarBase.asignarparametrosString(3, "Vendedor");
-            GestionarBase.ejecutarprocedimiento();
-        } else if (e instanceof Administrador) {
-            GestionarBase.llamarprocedimiento("{call agregarRol(?,?,?)}");
-            GestionarBase.asignarparametrosString(1, e.getCedula());
-            GestionarBase.asignarparametrosString(2, "0");
-            GestionarBase.asignarparametrosString(3, "Administrador");
-            GestionarBase.ejecutarprocedimiento();
-        } else if (e instanceof Comprador) {
-            GestionarBase.llamarprocedimiento("{call agregarRol(?,?,?)}");
-            GestionarBase.asignarparametrosString(1, e.getCedula());
-            GestionarBase.asignarparametrosString(2, "2");
-            GestionarBase.asignarparametrosString(3, "Comprador");
-            GestionarBase.ejecutarprocedimiento();
-        }
+        e.registrarEstudiante();
         GestionarBase.cerrar();
     }
 
@@ -77,30 +54,7 @@ public class EstudianteDAO {
         GestionarBase.asignarparametrosString(7, e.getEmail());
         GestionarBase.asignarparametrosString(6, e.getDireccion());
         GestionarBase.ejecutarprocedimiento();
-        if (e instanceof Vendedor) {
-            Vendedor v = (Vendedor) e;
-            GestionarBase.llamarprocedimiento("{call registrarVendedor(?,?)}");
-            GestionarBase.asignarparametrosString(1, e.getCedula());
-            GestionarBase.asignarparametrosDouble(2, ((Vendedor) e).getCalificacionPV());
-            GestionarBase.ejecutarprocedimiento();
-            GestionarBase.llamarprocedimiento("{call agregarRol(?,?,?)}");
-            GestionarBase.asignarparametrosString(1, e.getCedula());
-            GestionarBase.asignarparametrosString(2, "1");
-            GestionarBase.asignarparametrosString(3, "Vendedor");
-            GestionarBase.ejecutarprocedimiento();
-        } else if (e instanceof Administrador) {
-            GestionarBase.llamarprocedimiento("{call agregarRol(?,?,?)}");
-            GestionarBase.asignarparametrosString(1, e.getCedula());
-            GestionarBase.asignarparametrosString(2, "0");
-            GestionarBase.asignarparametrosString(3, "Administrador");
-            GestionarBase.ejecutarprocedimiento();
-        } else if (e instanceof Comprador) {
-            GestionarBase.llamarprocedimiento("{call agregarRol(?,?,?)}");
-            GestionarBase.asignarparametrosString(1, e.getCedula());
-            GestionarBase.asignarparametrosString(2, "2");
-            GestionarBase.asignarparametrosString(3, "Comprador");
-            GestionarBase.ejecutarprocedimiento();
-        }
+        e.actualizarEstudiante();
         GestionarBase.cerrar();
     }
 
@@ -108,15 +62,10 @@ public class EstudianteDAO {
         ResultSet r;
         GestionarBase.llamarprocedimiento("{call verificarLogin(?)}");
         GestionarBase.asignarparametrosString(1, user);
-        System.out.println("asignarParametro");
         GestionarBase.ejecutarprocedimiento();
-        System.out.println("ejecutarProcedimiento");
         r = GestionarBase.obtenerprocedmiento();
-        
         LinkedList<String> datos=new LinkedList<String>();
-        
         boolean resultado = false;
-        
         try {
             resultado = r.next();
             if(resultado){
@@ -126,8 +75,6 @@ public class EstudianteDAO {
         } catch (SQLException ex) {
             Logger.getLogger(EstudianteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
         GestionarBase.cerrar();
         return datos;
     }

@@ -82,7 +82,7 @@ public class ProductoDAO {
 
     public static ArrayList<Producto> obtener_productosVendedor(String a) {
 
-        ArrayList<Producto> arreglo = new ArrayList<Producto>();
+        ArrayList<Producto> arreglo = new ArrayList<>();
         ResultSet r;
         GestionarBase.llamarprocedimiento("{call obtener_productosVendedor(?)}");
         GestionarBase.asignarparametrosString(1, a);
@@ -147,9 +147,7 @@ public class ProductoDAO {
         r = GestionarBase.obtenerprocedmiento();
         System.out.println(" query consultado");
         try {
-            while (r.next()) {
-                /*Producto articulo = new Producto(r.getString("nombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
-                        r.getString("idAdmin"),new Vendedor(r.getString("idVendedor"),"Andres","Ipa"), r.getInt("cantidad"));*/
+            while (r.next()) {               
                 Producto articulo = new Producto(r.getString("pNombre"), r.getString("descripcion"), r.getString("categoria"), r.getInt("idProducto"), r.getFloat("precio"),
                         r.getString("idAdmin"),new Vendedor(r.getString("idVendedor"),r.getString("nombre"),r.getString("apellido")), r.getInt("cantidad"));
                 articulos.add(articulo);
@@ -166,7 +164,8 @@ public class ProductoDAO {
     public static ArrayList<Compra> comprasPendientes() {
 	ArrayList<Compra> comprasP  = new ArrayList();
         ResultSet r;
-        GestionarBase.llamarprocedimiento("{call consultarPendientes()}");
+        GestionarBase.llamarprocedimiento("{call consultarCompraPendiente(?)}");
+        GestionarBase.asignarparametrosString(1, "1312561952");
         GestionarBase.ejecutarprocedimiento();
         r = GestionarBase.obtenerprocedmiento();
         try {
